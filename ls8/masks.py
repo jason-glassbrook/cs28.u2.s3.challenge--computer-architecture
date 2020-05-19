@@ -35,64 +35,64 @@ class ProcessorMasks:
 
         return (self.WORD if mask is None else mask)
 
-    def word_mask(self, value):
+    def word_mask(self, bits):
         """
-        Mask the provided `value` to clip it to the world length `self.WORD`.
-        """
-
-        return self.and_mask(value)
-
-    def and_mask(self, value, mask=None):
-        """
-        AND-mask the provided `value` with `mask`.
+        Mask the provided `bits` to clip it to the word length `self.WORD`.
         """
 
-        return (value & self.mask_or_word(mask))
+        return self.and_mask(bits)
 
-    def or_mask(self, value, mask=None):
+    def and_mask(self, bits, mask=None):
         """
-        OR-mask the provided `value` with `mask`.
-        """
-
-        return (value | self.mask_or_word(mask))
-
-    def xor_mask(self, value, mask=None):
-        """
-        XOR-mask the provided `value` with `mask`.
+        AND-mask the provided `bits` with `mask`.
         """
 
-        return (value ^ self.mask_or_word(mask))
+        return (bits & self.mask_or_word(mask))
 
-    def is_masked_by(self, value, mask):
+    def or_mask(self, bits, mask=None):
         """
-        Test if `value` is masked by `mask`.
-        Returns `True` if the AND-masked `value` is equal to `mask`.
+        OR-mask the provided `bits` with `mask`.
+        """
+
+        return (bits | self.mask_or_word(mask))
+
+    def xor_mask(self, bits, mask=None):
+        """
+        XOR-mask the provided `bits` with `mask`.
+        """
+
+        return (bits ^ self.mask_or_word(mask))
+
+    def is_masked_by(self, bits, mask):
+        """
+        Test if `bits` is masked by `mask`.
+        Returns `True` if the AND-masked `bits` is equal to `mask`.
         Otherwise, returns `False`.
         """
 
-        return (self.and_mask(value, mask) == mask)
+        return (self.and_mask(bits, mask) == mask)
 
-    def is_not_masked_by(self, value, mask):
+    def is_not_masked_by(self, bits, mask):
         """
-        Test if `value` is _not_ masked by `mask`.
+        Test if `bits` is _not_ masked by `mask`.
         Returns the opposite of `self.is_masked_by`.
         """
 
-        return (not self.is_masked_by(value, mask))
+        return (not self.is_masked_by(bits, mask))
 
-    def equal_with_mask(self, value_a, value_b, mask):
+    def equal_with_mask(self, bits_a, bits_b, mask):
         """
-        Test if the `mask`ed portions of `value_a` and `value_b` are equal.
+        Test if the `mask`ed portions of `bits_a` and `bits_b` are equal.
         """
 
-        masked_a = self.and_mask(value_a, mask)
-        masked_b = self.and_mask(value_b, mask)
+        masked_a = self.and_mask(bits_a, mask)
+        masked_b = self.and_mask(bits_b, mask)
         return (masked_a == masked_b)
 
-    def not_equal_with_mask(self, value_a, value_b, mask):
+    def not_equal_with_mask(self, bits_a, bits_b, mask):
         """
-        Test if the `mask`ed portions of `value_a` and `value_b` are _not_ equal.
+        Test if the `mask`ed portions of `bits_a` and `bits_b` are _not_ equal.
         Returns the opposite of `self.equal_with_mask`.
         """
 
-        return (not self.equal_with_mask(value_a, value_b, mask))
+        return (not self.equal_with_mask(bits_a, bits_b, mask))
