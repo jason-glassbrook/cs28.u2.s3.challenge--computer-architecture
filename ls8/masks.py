@@ -47,32 +47,36 @@ class ProcessorMasks:
         AND-mask the provided `bits` with `mask`.
         """
 
-        return (bits & self.mask_or_word(mask))
+        mask = self.mask_or_word(mask)
+        return (bits & mask)
 
     def or_mask(self, bits, mask=None):
         """
         OR-mask the provided `bits` with `mask`.
         """
 
-        return (bits | self.mask_or_word(mask))
+        mask = self.mask_or_word(mask)
+        return (bits | mask)
 
     def xor_mask(self, bits, mask=None):
         """
         XOR-mask the provided `bits` with `mask`.
         """
 
-        return (bits ^ self.mask_or_word(mask))
+        mask = self.mask_or_word(mask)
+        return (bits ^ mask)
 
-    def is_masked_by(self, bits, mask):
+    def is_masked_by(self, bits, mask=None):
         """
         Test if `bits` is masked by `mask`.
         Returns `True` if the AND-masked `bits` is equal to `mask`.
         Otherwise, returns `False`.
         """
 
+        mask = self.mask_or_word(mask)
         return (self.and_mask(bits, mask) == mask)
 
-    def is_not_masked_by(self, bits, mask):
+    def is_not_masked_by(self, bits, mask=None):
         """
         Test if `bits` is _not_ masked by `mask`.
         Returns the opposite of `self.is_masked_by`.
@@ -80,16 +84,17 @@ class ProcessorMasks:
 
         return (not self.is_masked_by(bits, mask))
 
-    def equal_with_mask(self, bits_a, bits_b, mask):
+    def equal_with_mask(self, bits_a, bits_b, mask=None):
         """
         Test if the `mask`ed portions of `bits_a` and `bits_b` are equal.
         """
 
+        mask = self.mask_or_word(mask)
         masked_a = self.and_mask(bits_a, mask)
         masked_b = self.and_mask(bits_b, mask)
         return (masked_a == masked_b)
 
-    def not_equal_with_mask(self, bits_a, bits_b, mask):
+    def not_equal_with_mask(self, bits_a, bits_b, mask=None):
         """
         Test if the `mask`ed portions of `bits_a` and `bits_b` are _not_ equal.
         Returns the opposite of `self.equal_with_mask`.
