@@ -6,31 +6,13 @@ import sys
 import math
 
 from .constants import ProcessorConstants
+from .masks import ProcessorMasks
 
 ############################################################
 
 BIT_COUNT = 8
 constants = ProcessorConstants(BIT_COUNT)
-
-BIT__MASK = int(bin(constants.WORD_SIZE - 1), base=2)
-
-NOT__MASK = BIT__MASK
-
-FLAG_EQ__MASK = 2 ** 0
-FLAG_GT__MASK = 2 ** 1
-FLAG_LT__MASK = 2 ** 2
-FLAG_NEQ__MASK = FLAG_LT__MASK | FLAG_GT__MASK
-FLAG_NGT__MASK = FLAG_LT__MASK | FLAG_EQ__MASK
-FLAG_NLT__MASK = FLAG_EQ__MASK | FLAG_GT__MASK
-
-#-----------------------------------------------------------
-
-
-def mask(value, binary_mask=BIT__MASK):
-    """Mask the provided `value` to clip it to the required number of bits."""
-
-    return (value & binary_mask)
-
+masks = ProcessorMasks(constants)
 
 ############################################################
 #   CPU
@@ -77,7 +59,7 @@ class CPU:
     def write_register(self, address, value):
         """Write the `value` to the provided `address` in the register."""
 
-        self.register[address] = mask(value)
+        self.register[address] = masks.word_mask(value)
 
         return
 
@@ -91,7 +73,7 @@ class CPU:
     def write_memory(self, address, value):
         """Write the `value` to the provided `address` in the memory."""
 
-        self.memory[address] = mask(value)
+        self.memory[address] = masks.word_mask(value)
 
         return
 
