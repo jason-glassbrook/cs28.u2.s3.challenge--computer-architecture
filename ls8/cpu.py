@@ -103,15 +103,15 @@ class CPU:
     def __init__(self):
         """Construct a new CPU."""
 
-        self.memory = [0] * BIT__COUNT
+        self.memory = BinaryItemSequence([0] * BIT__COUNT)
 
-        self.program = []
-        self.program_pointer = 0
+        self.program = BinaryItemSequence([])
+        self.program_pointer = BinaryItem(0)
 
-        self.stack = []
-        self.stack_pointer = 0
+        self.stack = BinaryItemSequence([])
+        self.stack_pointer = BinaryItem(0)
 
-        self.flags = 0
+        self.flags = BinaryItem(0)
 
         return
 
@@ -125,7 +125,7 @@ class CPU:
     def write_memory(self, address, value):
         """Write the `value` to the provided `address` in memory."""
 
-        self.memory[address] = mask(value)
+        self.memory[address] = value
 
         return
 
@@ -134,11 +134,9 @@ class CPU:
     def load(self):
         """Load a program into memory."""
 
-        address = 0
-
         # For now, we've just hardcoded a program:
 
-        program = [
+        self.program = BinaryItemSequence([
             # From print8.ls8
             0b10000010,  # LDI R0,8
             0b00000000,
@@ -146,11 +144,7 @@ class CPU:
             0b01000111,  # PRN R0
             0b00000000,
             0b00000001,  # HLT
-        ]
-
-        for instruction in program:
-            self.write_memory(address, instruction)
-            address += 1
+        ])
 
     ############################################################
 
@@ -158,8 +152,8 @@ class CPU:
         """ALU operations."""
 
         if op == "ADD":
-            value_a = self.read_memory(reg_a)
-            value_b = self.read_memory(reg_b)
+            value_a = self.read_memory(reg_a).value
+            value_b = self.read_memory(reg_b).value
             self.write_memory(reg_a, value_a + value_b)
         # elif op == "SUB": etc
         else:
@@ -178,9 +172,9 @@ class CPU:
                 self.program_pointer,
                 self.stack_pointer,
                 self.flags,
-                self.read_memory(self.pc),
-                self.read_memory(self.pc + 1),
-                self.read_memory(self.pc + 2),
+                self.read_memory(self.program_pointer),
+                self.read_memory(self.program_pointer + 1),
+                self.read_memory(self.program_pointer + 2),
             ),
             end="",
         )
