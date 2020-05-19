@@ -13,9 +13,9 @@ from tools.numbers import int_to_str
 
 class ProcessorConstants:
 
-    def __init__(self, BIT_COUNT):
+    def __init__(self, bit_count):
 
-        self.BIT_COUNT = BIT_COUNT
+        self.BIT_COUNT = bit_count
         self.WORD_SIZE = 2 ** self.BIT_COUNT
 
         self.BIN_WIDTH = self.BIT_COUNT
