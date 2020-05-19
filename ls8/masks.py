@@ -1,4 +1,5 @@
 """
+
 Generate basic masks for a computer processor.
 """
 
@@ -27,31 +28,37 @@ class ProcessorMasks:
 
         return
 
+    def mask_or_word(self, mask=None):
+        """
+        Use `mask` if given. Otherwise, use `self.WORD`.
+        """
+
+        return (self.WORD if mask is None else mask)
+
     def word_mask(self, value):
-        """Mask the provided `value` to clip it to the required number of bits."""
+        """
+        Mask the provided `value` to clip it to the world length `self.WORD`.
+        """
 
         return self.and_mask(value)
 
     def and_mask(self, value, mask=None):
-        """AND-Mask the provided `value`."""
+        """
+        AND-mask the provided `value` with `mask`.
+        """
 
-        if mask is None:
-            mask = self.WORD
-
-        return (value & mask)
+        return (value & self.mask_or_word(mask))
 
     def or_mask(self, value, mask=None):
-        """OR-Mask the provided `value`."""
+        """
+        OR-mask the provided `value` with `mask`.
+        """
 
-        if mask is None:
-            mask = self.WORD
-
-        return (value | mask)
+        return (value | self.mask_or_word(mask))
 
     def xor_mask(self, value, mask=None):
-        """XOR-Mask the provided `value`."""
+        """
+        XOR-mask the provided `value` with `mask`.
+        """
 
-        if mask is None:
-            mask = self.WORD
-
-        return (value ^ mask)
+        return (value ^ self.mask_or_word(mask))
