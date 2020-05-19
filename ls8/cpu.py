@@ -6,7 +6,8 @@ import math
 ############################################################
 
 BIT__COUNT = 8
-BIT__MASK = int(bin((2 ** BIT__COUNT) - 1), base=2)
+WORD__SIZE = 2 ** BIT__COUNT
+BIT__MASK = int(bin(WORD__SIZE - 1), base=2)
 
 HEX__COUNT = math.ceil(BIT__COUNT / 4)
 FORMAT = f"0x%0{HEX__COUNT}X"
@@ -112,29 +113,43 @@ class CPU:
     def __init__(self):
         """Construct a new CPU."""
 
-        self.memory = BinaryItemSequence([0] * BIT__COUNT)
+        self.register = [0] * BIT__COUNT
+        self.register[BIT__COUNT - 1] = 0xF4
 
-        self.program = BinaryItemSequence([])
-        self.program_pointer = BinaryItem(0)
+        self.memory = [0] * WORD__SIZE
 
-        self.stack = BinaryItemSequence([])
-        self.stack_pointer = BinaryItem(0)
+        self.program_pointer = 0
+        self.stack_pointer = 0
 
-        self.flags = BinaryItem(0)
+        self.flags = 0
+
+        return
+
+    ############################################################
+
+    def read_register(self, address):
+        """Read the `value` from the provided `address` in the register."""
+
+        return self.register[address]
+
+    def write_register(self, address, value):
+        """Write the `value` to the provided `address` in the register."""
+
+        self.register[address] = mask(value)
 
         return
 
     ############################################################
 
     def read_memory(self, address):
-        """Read the `value` from the provided `address` in memory."""
+        """Read the `value` from the provided `address` in the memory."""
 
         return self.memory[address]
 
     def write_memory(self, address, value):
-        """Write the `value` to the provided `address` in memory."""
+        """Write the `value` to the provided `address` in the memory."""
 
-        self.memory[address] = value
+        self.memory[address] = mask(value)
 
         return
 
@@ -145,7 +160,7 @@ class CPU:
 
         # For now, we've just hardcoded a program:
 
-        self.program = BinaryItemSequence([
+        self.program = [
             # From print8.ls8
             0b10000010,  # LDI R0,8
             0b00000000,
@@ -153,7 +168,7 @@ class CPU:
             0b01000111,  # PRN R0
             0b00000000,
             0b00000001,  # HLT
-        ])
+        ]
 
     ############################################################
 
@@ -161,9 +176,9 @@ class CPU:
         """ALU operations."""
 
         if op == "ADD":
-            value_a = self.read_memory(reg_a).value
-            value_b = self.read_memory(reg_b).value
-            self.write_memory(reg_a, value_a + value_b)
+            value_a = self.read_register(reg_a)
+            value_b = self.read_register(reg_b)
+            self.write_register(reg_a, value_a + value_b)
         # elif op == "SUB": etc
         else:
             raise Exception("Unsupported ALU operation")
@@ -181,15 +196,15 @@ class CPU:
                 self.program_pointer,
                 self.stack_pointer,
                 self.flags,
-                self.read_memory(self.program_pointer),
-                self.read_memory(self.program_pointer + 1),
-                self.read_memory(self.program_pointer + 2),
+                self.read_register(self.program_pointer),
+                self.read_register(self.program_pointer + 1),
+                self.read_register(self.program_pointer + 2),
             ),
             end="",
         )
 
         for address in range(BIT__COUNT):
-            print(f" {FORMAT}" % self.read_memory(address), end="")
+            print(f" {FORMAT}" % self.read_register(address), end="")
 
         print()
 
