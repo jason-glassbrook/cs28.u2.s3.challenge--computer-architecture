@@ -2,13 +2,35 @@
 
 import sys
 
+############################################################
+
+BIT__COUNT = 8
+BIT__MASK = int(bin((2 ** BIT__COUNT) - 1), base=2)
+
+############################################################
+
 
 class CPU:
     """Main CPU class."""
 
+    ############################################################
+
     def __init__(self):
         """Construct a new CPU."""
-        pass
+
+        self.memory = [0] * BIT__COUNT
+
+        self.program = []
+        self.program_pointer = 0
+
+        self.stack = []
+        self.stack_pointer = 0
+
+        self.flags = 0
+
+        return
+
+    ############################################################
 
     def load(self):
         """Load a program into memory."""
@@ -31,6 +53,8 @@ class CPU:
             self.ram[address] = instruction
             address += 1
 
+    ############################################################
+
     def alu(self, op, reg_a, reg_b):
         """ALU operations."""
 
@@ -39,6 +63,8 @@ class CPU:
         # elif op == "SUB": etc
         else:
             raise Exception("Unsupported ALU operation")
+
+    ############################################################
 
     def trace(self):
         """
@@ -62,6 +88,8 @@ class CPU:
             print(" %02X" % self.reg[i], end="")
 
         print()
+
+    ############################################################
 
     def run(self):
         """Run the CPU."""
