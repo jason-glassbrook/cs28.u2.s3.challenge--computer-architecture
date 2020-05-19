@@ -62,3 +62,37 @@ class ProcessorMasks:
         """
 
         return (value ^ self.mask_or_word(mask))
+
+    def is_masked_by(self, value, mask):
+        """
+        Test if `value` is masked by `mask`.
+        Returns `True` if the AND-masked `value` is equal to `mask`.
+        Otherwise, returns `False`.
+        """
+
+        return (self.and_mask(value, mask) == mask)
+
+    def is_not_masked_by(self, value, mask):
+        """
+        Test if `value` is _not_ masked by `mask`.
+        Returns the opposite of `self.is_masked_by`.
+        """
+
+        return (not self.is_masked_by(value, mask))
+
+    def equal_with_mask(self, value_a, value_b, mask):
+        """
+        Test if the `mask`ed portions of `value_a` and `value_b` are equal.
+        """
+
+        masked_a = self.and_mask(value_a, mask)
+        masked_b = self.and_mask(value_b, mask)
+        return (masked_a == masked_b)
+
+    def not_equal_with_mask(self, value_a, value_b, mask):
+        """
+        Test if the `mask`ed portions of `value_a` and `value_b` are _not_ equal.
+        Returns the opposite of `self.equal_with_mask`.
+        """
+
+        return (not self.equal_with_mask(value_a, value_b, mask))
