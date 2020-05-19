@@ -152,10 +152,7 @@ class CPU:
 
     @flag_eq.setter
     def flag_eq(self, value):
-        if value:
-            self.flags = masks.or_mask(self.flags, masks.FLAG_EQ)
-        else:
-            self.flags = masks.and_mask(self.flags, ~masks.FLAG_EQ)
+        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_EQ)
         return
 
     #-----------------------------------------------------------
@@ -166,10 +163,7 @@ class CPU:
 
     @flag_gt.setter
     def flag_gt(self, value):
-        if value:
-            self.flags = masks.or_mask(self.flags, masks.FLAG_GT)
-        else:
-            self.flags = masks.and_mask(self.flags, ~masks.FLAG_GT)
+        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_GT)
         return
 
     #-----------------------------------------------------------
@@ -180,10 +174,7 @@ class CPU:
 
     @flag_lt.setter
     def flag_lt(self, value):
-        if value:
-            self.flags = masks.or_mask(self.flags, masks.FLAG_LT)
-        else:
-            self.flags = masks.and_mask(self.flags, ~masks.FLAG_LT)
+        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_LT)
         return
 
     #-----------------------------------------------------------
@@ -194,10 +185,7 @@ class CPU:
 
     @flag_neq.setter
     def flag_neq(self, value):
-        if value:
-            self.flags = masks.or_mask(self.flags, masks.FLAG_NEQ)
-        else:
-            self.flags = masks.and_mask(self.flags, ~masks.FLAG_NEQ)
+        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_NEQ)
         return
 
     #-----------------------------------------------------------
@@ -208,10 +196,7 @@ class CPU:
 
     @flag_ngt.setter
     def flag_ngt(self, value):
-        if value:
-            self.flags = masks.or_mask(self.flags, masks.FLAG_NGT)
-        else:
-            self.flags = masks.and_mask(self.flags, ~masks.FLAG_NGT)
+        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_NGT)
         return
 
     #-----------------------------------------------------------
@@ -222,8 +207,5 @@ class CPU:
 
     @flag_nlt.setter
     def flag_nlt(self, value):
-        if value:
-            self.flags = masks.or_mask(self.flags, masks.FLAG_NLT)
-        else:
-            self.flags = masks.and_mask(self.flags, ~masks.FLAG_NLT)
+        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_NLT)
         return
