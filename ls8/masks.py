@@ -1,5 +1,4 @@
 """
-
 Generate basic masks for a computer processor.
 """
 
