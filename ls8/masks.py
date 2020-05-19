@@ -5,22 +5,58 @@ Generate basic masks for a computer processor.
 ############################################################
 
 
+def _block(width, shift):
+
+    return (((2 ** width) - 1) << shift)
+
+
+def _unblock(width, shift, bits):
+
+    return (bits >> shift)
+
+
+#-----------------------------------------------------------
+
+
 class ProcessorMasks:
 
     def __init__(self, constants):
 
         self.WORD = int(bin(constants.WORD_SIZE - 1), base=2)
 
-        self.OPCODE_ARGS = 0b11000000
-        self.OPCODE_USES_ALU = 0b00100000
-        self.OPCODE_SETS_POINTER = 0b00010000
-        self.OPCODE_IDENTIFIER = self.WORD ^ (
-            self.OPCODE_ARGS | self.OPCODE_USES_ALU | self.OPCODE_SETS_POINTER
+        # opcode part masks
+
+        self.OPERATION_ARGS = _block(
+            constants.OPERATION_ARGS__WIDTH,
+            constants.OPERATION_ARGS__SHIFT,
+        )
+        self.OPERATION_USES_ALU = _block(
+            constants.OPERATION_USES_ALU__WIDTH,
+            constants.OPERATION_USES_ALU__SHIFT,
+        )
+        self.OPERATION_SETS_POINTER = _block(
+            constants.OPERATION_SETS_POINTER__WIDTH,
+            constants.OPERATION_SETS_POINTER__SHIFT,
+        )
+        self.OPERATION_IDENTIFIER = _block(
+            constants.OPERATION_IDENTIFIER__WIDTH,
+            constants.OPERATION_IDENTIFIER__SHIFT,
         )
 
-        self.FLAG_EQ = 2 ** 0
-        self.FLAG_GT = 2 ** 1
-        self.FLAG_LT = 2 ** 2
+        # flag part masks
+
+        self.FLAG_EQ = _block(
+            constants.FLAG__WIDTH,
+            constants.FLAG_EQ__SHIFT,
+        )
+        self.FLAG_GT = _block(
+            constants.FLAG__WIDTH,
+            constants.FLAG_GT__SHIFT,
+        )
+        self.FLAG_LT = _block(
+            constants.FLAG__WIDTH,
+            constants.FLAG_LT__SHIFT,
+        )
         self.FLAG_NEQ = self.FLAG_LT | self.FLAG_GT
         self.FLAG_NGT = self.FLAG_LT | self.FLAG_EQ
         self.FLAG_NLT = self.FLAG_EQ | self.FLAG_GT

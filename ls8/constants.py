@@ -18,6 +18,29 @@ class ProcessorConstants:
         self.BIT_COUNT = bit_count
         self.WORD_SIZE = 2 ** self.BIT_COUNT
 
+        # operations specification
+
+        self.OPERATION_ARGS__WIDTH = 2
+        self.OPERATION_ARGS__SHIFT = self.BIT_COUNT - 2
+
+        self.OPERATION_USES_ALU__WIDTH = 1
+        self.OPERATION_USES_ALU__SHIFT = self.BIT_COUNT - 3
+
+        self.OPERATION_SETS_POINTER__WIDTH = 1
+        self.OPERATION_SETS_POINTER__SHIFT = self.BIT_COUNT - 4
+
+        self.OPERATION_IDENTIFIER__WIDTH = 4
+        self.OPERATION_IDENTIFIER__SHIFT = 0
+
+        # flags specification
+
+        self.FLAG__WIDTH = 1
+        self.FLAG_EQ__SHIFT = 0
+        self.FLAG_GT__SHIFT = 1
+        self.FLAG_LT__SHIFT = 2
+
+        # formatting info
+
         self.BIN_WIDTH = self.BIT_COUNT
         self.TET_WIDTH = math.ceil(self.BIN_WIDTH / 2)
         self.OCT_WIDTH = math.ceil(self.BIN_WIDTH / 3)
