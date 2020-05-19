@@ -101,3 +101,31 @@ class ProcessorMasks:
         """
 
         return (not self.equal_with_mask(bits_a, bits_b, mask))
+
+    def turn_on_masked(self, bits, mask=None):
+        """
+        Turn "on" the `mask`ed portions of `bits`.
+        """
+
+        mask = self.mask_or_word(mask)
+        return self.or_mask(bits, mask)
+
+    def turn_off_masked(self, bits, mask=None):
+        """
+        Turn "off" the `mask`ed portions of `bits`.
+        """
+
+        mask = self.mask_or_word(mask)
+        return self.and_mask(bits, self.WORD - mask)
+
+    def toggle_masked(self, toggle, bits, mask=None):
+        """
+        Toggle "on" or "off" the `masked` portions of `bits` based on `toggle`.
+        """
+
+        mask = self.mask_or_word(mask)
+        toggled = (
+            self.turn_on_masked(bits, mask)
+            if toggle else self.turn_off_masked(bits, mask)
+        )
+        return toggled
