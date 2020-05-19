@@ -83,20 +83,20 @@ value of the stack pointer.
 
 ## Step 2: Add RAM functions
 
-In `CPU`, add method `ram_read()` and `ram_write()` that access the RAM inside
+In `CPU`, add method `read_memory()` and `write_memory()` that access the RAM inside
 the `CPU` object.
 
-`ram_read()` should accept the address to read and return the value stored
+`read_memory()` should accept the address to read and return the value stored
 there.
 
-`ram_write()` should accept a value to write, and the address to write it to.
+`write_memory()` should accept a value to write, and the address to write it to.
 
 > Inside the CPU, there are two internal registers used for memory operations:
 > the _Memory Address Register_ (MAR) and the _Memory Data Register_ (MDR). The
 > MAR contains the address that is being read or written to. The MDR contains
 > the data that was read or the data to write. You don't need to add the MAR or
 > MDR to your `CPU` class, but they would make handy parameter names for
-> `ram_read()` and `ram_write()`, if you wanted.
+> `read_memory()` and `write_memory()`, if you wanted.
 
 We'll make use of these helper function later.
 
@@ -114,7 +114,7 @@ variable in `run()`.
 
 Some instructions requires up to the next two bytes of data _after_ the `PC` in
 memory to perform operations on. Sometimes the byte value is a register number,
-other times it's a constant value (in the case of `LDI`). Using `ram_read()`,
+other times it's a constant value (in the case of `LDI`). Using `read_memory()`,
 read the bytes at `PC+1` and `PC+2` from RAM into variables `operand_a` and
 `operand_b` in case the instruction needs them.
 

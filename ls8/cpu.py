@@ -7,6 +7,15 @@ import sys
 BIT__COUNT = 8
 BIT__MASK = int(bin((2 ** BIT__COUNT) - 1), base=2)
 
+#-----------------------------------------------------------
+
+
+def mask(value, binary_mask=BIT__MASK):
+    """Mask the provided `value` to clip it to the required number of bits."""
+
+    return (value & binary_mask)
+
+
 ############################################################
 
 
@@ -32,6 +41,20 @@ class CPU:
 
     ############################################################
 
+    def read_memory(self, address):
+        """Read the `value` from the provided `address` in memory."""
+
+        return self.memory[address]
+
+    def write_memory(self, address, value):
+        """Write the `value` to the provided `address` in memory."""
+
+        self.memory[address] = mask(value)
+
+        return
+
+    ############################################################
+
     def load(self):
         """Load a program into memory."""
 
@@ -50,7 +73,7 @@ class CPU:
         ]
 
         for instruction in program:
-            self.ram[address] = instruction
+            self.write_memory(address, instruction)
             address += 1
 
     ############################################################
@@ -59,7 +82,9 @@ class CPU:
         """ALU operations."""
 
         if op == "ADD":
-            self.reg[reg_a] += self.reg[reg_b]
+            value_a = self.read_memory(reg_a)
+            value_b = self.read_memory(reg_b)
+            self.write_memory(reg_a, value_a + value_b)
         # elif op == "SUB": etc
         else:
             raise Exception("Unsupported ALU operation")
@@ -73,19 +98,19 @@ class CPU:
         """
 
         print(
-            f"TRACE: %02X | %02X %02X %02X |" % (
-                self.pc,
-                # self.fl,
-                # self.ie,
-                self.ram_read(self.pc),
-                self.ram_read(self.pc + 1),
-                self.ram_read(self.pc + 2),
+            f"TRACE --- %02X %02X %02X | %02X %02X %02X |" % (
+                self.program_pointer,
+                self.stack_pointer,
+                self.flags,
+                self.read_memory(self.pc),
+                self.read_memory(self.pc + 1),
+                self.read_memory(self.pc + 2),
             ),
             end="",
         )
 
-        for i in range(8):
-            print(" %02X" % self.reg[i], end="")
+        for address in range(BIT__COUNT):
+            print(" %02X" % self.read_memory(address), end="")
 
         print()
 
