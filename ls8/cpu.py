@@ -148,64 +148,82 @@ class CPU:
 
     @property
     def flag_eq(self):
-        return (self.flags & CPU.FLAG_EQ__MASK)
+        return (masks.and_mask(self.flags, masks.FLAG_EQ) > 0)
 
     @flag_eq.setter
     def flag_eq(self, value):
-        self.flags = (self.flags | CPU.FLAG_EQ__MASK)
+        if value:
+            self.flags = masks.or_mask(self.flags, masks.FLAG_EQ)
+        else:
+            self.flags = masks.and_mask(self.flags, ~masks.FLAG_EQ)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_gt(self):
-        return (self.flags & CPU.FLAG_GT__MASK)
+        return (masks.and_mask(self.flags, masks.FLAG_GT) > 0)
 
     @flag_gt.setter
     def flag_gt(self, value):
-        self.flags = (self.flags | CPU.FLAG_GT__MASK)
+        if value:
+            self.flags = masks.or_mask(self.flags, masks.FLAG_GT)
+        else:
+            self.flags = masks.and_mask(self.flags, ~masks.FLAG_GT)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_lt(self):
-        return (self.flags & CPU.FLAG_LT__MASK)
+        return (masks.and_mask(self.flags, masks.FLAG_LT) > 0)
 
     @flag_lt.setter
     def flag_lt(self, value):
-        self.flags = (self.flags | CPU.FLAG_LT__MASK)
+        if value:
+            self.flags = masks.or_mask(self.flags, masks.FLAG_LT)
+        else:
+            self.flags = masks.and_mask(self.flags, ~masks.FLAG_LT)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_neq(self):
-        return (self.flags & CPU.FLAG_NEQ__MASK)
+        return (masks.and_mask(self.flags, masks.FLAG_NEQ) > 0)
 
     @flag_neq.setter
     def flag_neq(self, value):
-        self.flags = (self.flags | CPU.FLAG_NEQ__MASK)
+        if value:
+            self.flags = masks.or_mask(self.flags, masks.FLAG_NEQ)
+        else:
+            self.flags = masks.and_mask(self.flags, ~masks.FLAG_NEQ)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_ngt(self):
-        return (self.flags & CPU.FLAG_NGT__MASK)
+        return (masks.and_mask(self.flags, masks.FLAG_NGT) > 0)
 
     @flag_ngt.setter
     def flag_ngt(self, value):
-        self.flags = (self.flags | CPU.FLAG_NGT__MASK)
+        if value:
+            self.flags = masks.or_mask(self.flags, masks.FLAG_NGT)
+        else:
+            self.flags = masks.and_mask(self.flags, ~masks.FLAG_NGT)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_nlt(self):
-        return (self.flags & CPU.FLAG_NLT__MASK)
+        return (masks.and_mask(self.flags, masks.FLAG_NLT) > 0)
 
     @flag_nlt.setter
     def flag_nlt(self, value):
-        self.flags = (self.flags | CPU.FLAG_NLT__MASK)
+        if value:
+            self.flags = masks.or_mask(self.flags, masks.FLAG_NLT)
+        else:
+            self.flags = masks.and_mask(self.flags, ~masks.FLAG_NLT)
         return
