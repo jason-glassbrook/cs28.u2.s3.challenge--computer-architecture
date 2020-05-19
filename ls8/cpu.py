@@ -14,6 +14,15 @@ FORMAT = f"0x%0{HEX__COUNT}X"
 # OCT__COUNT = math.ceil(BIT__COUNT / 3)
 # FORMAT = f"0o%0{OCT__COUNT}o"
 
+NOT__MASK = BIT__MASK
+
+FLAG_EQ__MASK = 2 ** 0
+FLAG_GT__MASK = 2 ** 1
+FLAG_LT__MASK = 2 ** 2
+FLAG_NEQ__MASK = FLAG_LT__MASK | FLAG_GT__MASK
+FLAG_NGT__MASK = FLAG_LT__MASK | FLAG_EQ__MASK
+FLAG_NLT__MASK = FLAG_EQ__MASK | FLAG_GT__MASK
+
 #-----------------------------------------------------------
 
 
@@ -189,3 +198,71 @@ class CPU:
     def run(self):
         """Run the CPU."""
         pass
+
+    ############################################################
+    #   PROPERTIES
+    ############################################################
+
+    @property
+    def flag_eq(self):
+        return (self.flags & CPU.FLAG_EQ__MASK)
+
+    @flag_eq.setter
+    def flag_eq(self, value):
+        self.flags = (self.flags | CPU.FLAG_EQ__MASK)
+        return
+
+    #-----------------------------------------------------------
+
+    @property
+    def flag_gt(self):
+        return (self.flags & CPU.FLAG_GT__MASK)
+
+    @flag_gt.setter
+    def flag_gt(self, value):
+        self.flags = (self.flags | CPU.FLAG_GT__MASK)
+        return
+
+    #-----------------------------------------------------------
+
+    @property
+    def flag_lt(self):
+        return (self.flags & CPU.FLAG_LT__MASK)
+
+    @flag_lt.setter
+    def flag_lt(self, value):
+        self.flags = (self.flags | CPU.FLAG_LT__MASK)
+        return
+
+    #-----------------------------------------------------------
+
+    @property
+    def flag_neq(self):
+        return (self.flags & CPU.FLAG_NEQ__MASK)
+
+    @flag_neq.setter
+    def flag_neq(self, value):
+        self.flags = (self.flags | CPU.FLAG_NEQ__MASK)
+        return
+
+    #-----------------------------------------------------------
+
+    @property
+    def flag_ngt(self):
+        return (self.flags & CPU.FLAG_NGT__MASK)
+
+    @flag_ngt.setter
+    def flag_ngt(self, value):
+        self.flags = (self.flags | CPU.FLAG_NGT__MASK)
+        return
+
+    #-----------------------------------------------------------
+
+    @property
+    def flag_nlt(self):
+        return (self.flags & CPU.FLAG_NLT__MASK)
+
+    @flag_nlt.setter
+    def flag_nlt(self, value):
+        self.flags = (self.flags | CPU.FLAG_NLT__MASK)
+        return
