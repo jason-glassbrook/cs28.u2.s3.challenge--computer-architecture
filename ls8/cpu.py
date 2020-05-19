@@ -1,19 +1,18 @@
 """CPU functionality."""
 
+############################################################
+
 import sys
 import math
 
+from .constants import ProcessorConstants
+
 ############################################################
 
-BIT__COUNT = 8
-WORD__SIZE = 2 ** BIT__COUNT
-BIT__MASK = int(bin(WORD__SIZE - 1), base=2)
+BIT_COUNT = 8
+constants = ProcessorConstants(BIT_COUNT)
 
-HEX__COUNT = math.ceil(BIT__COUNT / 4)
-FORMAT = f"0x%0{HEX__COUNT}X"
-
-# OCT__COUNT = math.ceil(BIT__COUNT / 3)
-# FORMAT = f"0o%0{OCT__COUNT}o"
+BIT__MASK = int(bin(constants.WORD_SIZE - 1), base=2)
 
 NOT__MASK = BIT__MASK
 
@@ -46,10 +45,10 @@ class CPU:
     def __init__(self):
         """Construct a new CPU."""
 
-        self.register = [0] * BIT__COUNT
-        self.register[BIT__COUNT - 1] = 0xF4
+        self.register = [0] * constants.BIT_COUNT
+        self.register[constants.BIT_COUNT - 1] = 0xF4
 
-        self.memory = [0] * WORD__SIZE
+        self.memory = [0] * constants.WORD_SIZE
 
         self.program_pointer = 0
         self.stack_pointer = 0
@@ -57,6 +56,16 @@ class CPU:
         self.flags = 0
 
         return
+
+    ############################################################
+
+    def format_value(self, value):
+
+        return constants.format_as_hex(value)
+
+    def format_iterable(self, *args):
+
+        return tuple(self.format_value(value) for value in args)
 
     ############################################################
 
@@ -125,19 +134,23 @@ class CPU:
         """
 
         print(
-            f"TRACE --- {FORMAT} {FORMAT} {FORMAT} | {FORMAT} {FORMAT} {FORMAT} |" % (
-                self.program_pointer,
-                self.stack_pointer,
-                self.flags,
-                self.read_register(self.program_pointer),
-                self.read_register(self.program_pointer + 1),
-                self.read_register(self.program_pointer + 2),
+            "TRACE --- {} {} {} | {} {} {} | ".format(
+                *self.format_iterable(
+                    self.program_pointer,
+                    self.stack_pointer,
+                    self.flags,
+                    self.read_register(self.program_pointer),
+                    self.read_register(self.program_pointer + 1),
+                    self.read_register(self.program_pointer + 2),
+                ),
             ),
             end="",
         )
 
-        for address in range(BIT__COUNT):
-            print(f" {FORMAT}" % self.read_register(address), end="")
+        print(
+            " ".join(self.format_iterable(*self.register)),
+            end="",
+        )
 
         print()
 
