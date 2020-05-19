@@ -148,7 +148,7 @@ class CPU:
 
     @property
     def flag_eq(self):
-        return (masks.and_mask(self.flags, masks.FLAG_EQ) > 0)
+        return masks.is_masked_by(self.flags, masks.FLAG_EQ)
 
     @flag_eq.setter
     def flag_eq(self, value):
@@ -162,7 +162,7 @@ class CPU:
 
     @property
     def flag_gt(self):
-        return (masks.and_mask(self.flags, masks.FLAG_GT) > 0)
+        return masks.is_masked_by(self.flags, masks.FLAG_GT)
 
     @flag_gt.setter
     def flag_gt(self, value):
@@ -176,7 +176,7 @@ class CPU:
 
     @property
     def flag_lt(self):
-        return (masks.and_mask(self.flags, masks.FLAG_LT) > 0)
+        return masks.is_masked_by(self.flags, masks.FLAG_LT)
 
     @flag_lt.setter
     def flag_lt(self, value):
@@ -190,7 +190,7 @@ class CPU:
 
     @property
     def flag_neq(self):
-        return (masks.and_mask(self.flags, masks.FLAG_NEQ) > 0)
+        return masks.is_masked_by(self.flags, masks.FLAG_NEQ)
 
     @flag_neq.setter
     def flag_neq(self, value):
@@ -204,7 +204,7 @@ class CPU:
 
     @property
     def flag_ngt(self):
-        return (masks.and_mask(self.flags, masks.FLAG_NGT) > 0)
+        return masks.is_masked_by(self.flags, masks.FLAG_NGT)
 
     @flag_ngt.setter
     def flag_ngt(self, value):
@@ -218,7 +218,7 @@ class CPU:
 
     @property
     def flag_nlt(self):
-        return (masks.and_mask(self.flags, masks.FLAG_NLT) > 0)
+        return masks.is_masked_by(self.flags, masks.FLAG_NLT)
 
     @flag_nlt.setter
     def flag_nlt(self, value):
