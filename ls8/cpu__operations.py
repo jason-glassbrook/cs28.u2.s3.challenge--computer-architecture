@@ -182,3 +182,18 @@ class ProcessorOperations:
         self.operations = operations
 
         return
+
+    def __getitem__(self, key):
+
+        return self.operations[key]
+
+    def __contains__(self, key):
+
+        return (key in self.operations)
+
+    def __iter__(self):
+
+        for key in self.operations:
+            yield key
+
+        return
