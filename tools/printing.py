@@ -23,6 +23,13 @@ NEWLINE = re.compile(r"[\r\n]+")
 #-----------------------------------------------------------
 
 
+def print_on(*args, **print_kwargs):
+
+    print(*args, **print_kwargs, end="")
+
+    return
+
+
 def print_line(
     width=DEFAULT__LINE__WIDTH,
     liner=DEFAULT__LINE__LINER,
