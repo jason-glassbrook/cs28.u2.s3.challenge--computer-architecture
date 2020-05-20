@@ -41,6 +41,8 @@ class CPU:
         self.program_pointer = 0
         self.stack_pointer = 0xF4
 
+        self.should_continue = False
+
         return
 
     #-----------------------------------------------------------
@@ -189,17 +191,25 @@ class CPU:
 
     #-----------------------------------------------------------
 
+    def start(self):
+        self.should_continue = True
+        return
+
+    def stop(self):
+        self.should_continue = False
+        return
+
     def run(self):
         """
         Run the CPU.
         """
 
+        self.start()
+
         print()
         print_heading("running program from memory...", width=40)
 
-        halted = False
-
-        while not halted:
+        while self.should_continue:
 
             word = self.read_memory(self.program_pointer)
             print(self.format_value(word), end="")
@@ -211,7 +221,7 @@ class CPU:
 
                 if operation["code_name"] == "HLT":
 
-                    halted = True
+                    self.stop()
 
             else:
 
