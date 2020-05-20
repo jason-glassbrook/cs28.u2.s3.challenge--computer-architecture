@@ -95,21 +95,30 @@ class CPU:
         Load a program into memory.
         """
 
-        # For now, we've just hardcoded a program:
-        program = [
-            # From print8.ls8
-            0b10000010,  # LDI R0,8
-            0b00000000,
-            0b00001000,
-            0b01000111,  # PRN R0
-            0b00000000,
-            0b00000001,  # HLT
-        ]
+        print()
+        print_heading("reading program from file...", width=40)
 
+        program = []
+
+        with open(program_file) as file:
+
+            for line in file:
+
+                line_str = line.split("#")[0].strip()
+
+                if line_str:
+
+                    word = int(line_str, base=2)
+                    program.append(word)
+                    print(self.format_value(word))
+
+        print()
         print_heading("writing program to memory...", width=40)
+
         for (i, word) in enumerate(program):
+
             self.write_memory(i, word)
-            print("{} -> {}".format(*self.format_iterable(i, word)))
+            print("[{}]: {}".format(*self.format_iterable(i, word)))
 
         return
 
