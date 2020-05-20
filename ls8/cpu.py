@@ -90,7 +90,7 @@ class CPU:
 
     ############################################################
 
-    def load(self):
+    def load(self, program_file):
         """
         Load a program into memory.
         """
