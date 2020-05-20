@@ -21,9 +21,13 @@ class CPU:
     Main CPU class.
     """
 
+    ############################################################
+
     CONSTANTS = ProcessorConstants(8)
     MASKS = ProcessorMasks(CONSTANTS)
     OPERATIONS = ProcessorOperations(CONSTANTS, MASKS)
+
+    #-----------------------------------------------------------
 
     def __init__(self):
         """
@@ -42,7 +46,7 @@ class CPU:
 
         return
 
-    ############################################################
+    #-----------------------------------------------------------
 
     def format_value(self, value):
 
@@ -52,6 +56,37 @@ class CPU:
 
         return tuple(self.format_value(value) for value in args)
 
+    def trace(self):
+        """
+        Handy function to print out the CPU state.
+        You might want to call this from run() if you need help debugging.
+        """
+
+        print(
+            "TRACE --- {} {} {} | {} {} {} | ".format(
+                *self.format_iterable(
+                    self.program_pointer,
+                    self.stack_pointer,
+                    self.flags,
+                    self.read_register(self.program_pointer),
+                    self.read_register(self.program_pointer + 1),
+                    self.read_register(self.program_pointer + 2),
+                ),
+            ),
+            end="",
+        )
+
+        print(
+            " ".join(self.format_iterable(*self.register)),
+            end="",
+        )
+
+        print()
+
+        return
+
+    ############################################################
+    #   REGISTER
     ############################################################
 
     def read_register(self, address):
@@ -71,6 +106,8 @@ class CPU:
         return
 
     ############################################################
+    #   MEMORY
+    ############################################################
 
     def read_memory(self, address):
         """
@@ -88,6 +125,8 @@ class CPU:
 
         return
 
+    ############################################################
+    #   PROCESSING
     ############################################################
 
     def load(self, program_file):
@@ -122,6 +161,17 @@ class CPU:
 
         return
 
+    #-----------------------------------------------------------
+
+    def run(self):
+        """
+        Run the CPU.
+        """
+
+        return
+
+    ############################################################
+    #   OPERATIONS
     ############################################################
 
     def alu(self, op, reg_a, reg_b):
@@ -136,46 +186,6 @@ class CPU:
         # elif op == "SUB": etc
         else:
             raise Exception("Unsupported ALU operation")
-
-        return
-
-    ############################################################
-
-    def trace(self):
-        """
-        Handy function to print out the CPU state.
-        You might want to call this from run() if you need help debugging.
-        """
-
-        print(
-            "TRACE --- {} {} {} | {} {} {} | ".format(
-                *self.format_iterable(
-                    self.program_pointer,
-                    self.stack_pointer,
-                    self.flags,
-                    self.read_register(self.program_pointer),
-                    self.read_register(self.program_pointer + 1),
-                    self.read_register(self.program_pointer + 2),
-                ),
-            ),
-            end="",
-        )
-
-        print(
-            " ".join(self.format_iterable(*self.register)),
-            end="",
-        )
-
-        print()
-
-        return
-
-    ############################################################
-
-    def run(self):
-        """
-        Run the CPU.
-        """
 
         return
 
