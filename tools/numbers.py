@@ -5,6 +5,11 @@
 DEFAULT__ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 DEFAULT__BASE = 10
 
+DEFAULT__INCLUDE_BASE = None    # None or 0, "before" or < 0, "after" or > 0
+DEFAULT__INCLUDE_BASE__BETWEEN = "'"    # string between base and number
+DEFAULT__INCLUDE_BASE__BEFORE_BASE = ""    # string before base
+DEFAULT__INCLUDE_BASE__AFTER_BASE = ""    # string after base
+
 #-----------------------------------------------------------
 
 
