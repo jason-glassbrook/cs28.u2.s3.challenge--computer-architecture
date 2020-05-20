@@ -194,6 +194,35 @@ class CPU:
         Run the CPU.
         """
 
+        print()
+        print_heading("running program from memory...", width=40)
+
+        halted = False
+
+        while not halted:
+
+            word = self.read_memory(self.program_pointer)
+            print(self.format_value(word), end="")
+
+            if word in self.OPERATIONS:
+
+                operation = self.OPERATIONS[word]
+                print(" <operation: {}>".format(operation["name"]), end="")
+
+                if operation["code_name"] == "HLT":
+
+                    halted = True
+
+            else:
+
+                print(" <unknown>".format(), end="")
+
+            self.program_pointer += 1
+            print()
+
+        print_line(width=40)
+        print("done.")
+
         return
 
     ############################################################
