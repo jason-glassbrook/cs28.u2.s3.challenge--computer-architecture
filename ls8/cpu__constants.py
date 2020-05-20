@@ -6,7 +6,12 @@ Generate basic constants for a computer processor.
 
 import math
 
-from tools.numbers import int_to_str
+from tools.numbers import (
+    int_to_str,
+    DEFAULT__INCLUDE_BASE__BETWEEN as BETWEEN,
+    DEFAULT__INCLUDE_BASE__BEFORE_BASE as BEFORE_BASE,
+    DEFAULT__INCLUDE_BASE__AFTER_BASE as AFTER_BASE,
+)
 
 ############################################################
 
@@ -48,18 +53,25 @@ class ProcessorConstants:
 
         return
 
+    def _format_as_base(self, number, base, width):
+
+        base_str = f"{BEFORE_BASE}{base}{AFTER_BASE}"
+        number_str = int_to_str(number, base=base, width=width)
+
+        return f"{base_str}{BETWEEN}{number_str}"
+
     def format_as_bin(self, number):
 
-        return f"2n{int_to_str(number, base=2, width=self.BIN_WIDTH)}"
+        return self._format_as_base(number, 2, self.BIN_WIDTH)
 
     def format_as_tet(self, number):
 
-        return f"4n{int_to_str(number, base=4, width=self.TET_WIDTH)}"
+        return self._format_as_base(number, 4, self.TET_WIDTH)
 
     def format_as_oct(self, number):
 
-        return f"8n{int_to_str(number, base=8, width=self.OCT_WIDTH)}"
+        return self._format_as_base(number, 8, self.OCT_WIDTH)
 
     def format_as_hex(self, number):
 
-        return f"16n{int_to_str(number, base=16, width=self.HEX_WIDTH)}"
+        return self._format_as_base(number, 16, self.HEX_WIDTH)
