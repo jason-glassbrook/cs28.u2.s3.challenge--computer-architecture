@@ -15,14 +15,18 @@ from .cpu__operations import ProcessorOperations
 
 
 class CPU:
-    """Main CPU class."""
+    """
+    Main CPU class.
+    """
 
     CONSTANTS = ProcessorConstants(8)
     MASKS = ProcessorMasks(CONSTANTS)
     OPERATIONS = ProcessorOperations(CONSTANTS, MASKS)
 
     def __init__(self):
-        """Construct a new CPU."""
+        """
+        Construct a new CPU.
+        """
 
         self.register = [0] * CPU.CONSTANTS.BIT_COUNT
         self.register[CPU.CONSTANTS.BIT_COUNT - 1] = 0xF4
@@ -49,12 +53,16 @@ class CPU:
     ############################################################
 
     def read_register(self, address):
-        """Read the `value` from the provided `address` in the register."""
+        """
+        Read the `value` from the provided `address` in the register.
+        """
 
         return self.register[address]
 
     def write_register(self, address, value):
-        """Write the `value` to the provided `address` in the register."""
+        """
+        Write the `value` to the provided `address` in the register.
+        """
 
         self.register[address] = CPU.MASKS.word_mask(value)
 
@@ -63,12 +71,16 @@ class CPU:
     ############################################################
 
     def read_memory(self, address):
-        """Read the `value` from the provided `address` in the memory."""
+        """
+        Read the `value` from the provided `address` in the memory.
+        """
 
         return self.memory[address]
 
     def write_memory(self, address, value):
-        """Write the `value` to the provided `address` in the memory."""
+        """
+        Write the `value` to the provided `address` in the memory.
+        """
 
         self.memory[address] = CPU.MASKS.word_mask(value)
 
@@ -77,7 +89,9 @@ class CPU:
     ############################################################
 
     def load(self):
-        """Load a program into memory."""
+        """
+        Load a program into memory.
+        """
 
         # For now, we've just hardcoded a program:
 
@@ -91,10 +105,14 @@ class CPU:
             0b00000001,  # HLT
         ]
 
+        return
+
     ############################################################
 
     def alu(self, op, reg_a, reg_b):
-        """ALU operations."""
+        """
+        ALU operations.
+        """
 
         if op == "ADD":
             value_a = self.read_register(reg_a)
@@ -104,12 +122,14 @@ class CPU:
         else:
             raise Exception("Unsupported ALU operation")
 
+        return
+
     ############################################################
 
     def trace(self):
         """
-        Handy function to print out the CPU state. You might want to call this
-        from run() if you need help debugging.
+        Handy function to print out the CPU state.
+        You might want to call this from run() if you need help debugging.
         """
 
         print(
@@ -133,11 +153,16 @@ class CPU:
 
         print()
 
+        return
+
     ############################################################
 
     def run(self):
-        """Run the CPU."""
-        pass
+        """
+        Run the CPU.
+        """
+
+        return
 
     ############################################################
     #   PROPERTIES
