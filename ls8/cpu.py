@@ -5,7 +5,7 @@
 import sys
 import math
 
-from tools.printing import print_line, print_heading
+from tools.printing import print_on, print_line, print_heading
 
 from .cpu__constants import ProcessorConstants
 from .cpu__masks import ProcessorMasks
@@ -90,7 +90,7 @@ class CPU:
         You might want to call this from run() if you need help debugging.
         """
 
-        print(
+        print_on(
             "TRACE --- {} {} {} | {} {} {} | ".format(
                 *self.format_iterable(
                     self.program_pointer,
@@ -99,15 +99,11 @@ class CPU:
                     self.read_register(self.program_pointer),
                     self.read_register(self.program_pointer + 1),
                     self.read_register(self.program_pointer + 2),
-                ),
-            ),
-            end="",
+                )
+            )
         )
 
-        print(
-            " ".join(self.format_iterable(*self.register)),
-            end="",
-        )
+        print_on(" ".join(self.format_iterable(*self.register)))
 
         print()
 
@@ -212,22 +208,38 @@ class CPU:
         while self.should_continue:
 
             word = self.read_memory(self.program_pointer)
-            print(self.format_value(word), end="")
+            print_on(self.format_value(word))
+            print_on(" -[ ")
 
             if word in self.OPERATIONS:
 
                 operation = self.OPERATIONS[word]
-                print(" <operation: {}>".format(operation["name"]), end="")
 
-                if operation["name"] == "HALT":
+                print_on("operation: {}".format(operation["name"]))
 
-                    self.stop()
+                # get the operation's function:
+                operation_fun = getattr(self, operation["name"], None)
+
+                # run the operation or stop
+                print_on(" | ")
+                if operation_fun:
+
+                    print_on("running...")
+                    operation_fun()
+
+                else:
+
+                    print_on("not implemented")
+                    # self.stop()
 
             else:
 
-                print(" <unknown>".format(), end="")
+                print_on("unknown")
+                # self.stop()
 
             self.program_pointer += 1
+
+            print_on(" ]-")
             print()
 
         print_line(width=40)
@@ -252,6 +264,10 @@ class CPU:
         else:
             raise Exception("Unsupported ALU operation")
 
+        return
+
+    def HALT(self):
+        self.stop()
         return
 
     ############################################################
