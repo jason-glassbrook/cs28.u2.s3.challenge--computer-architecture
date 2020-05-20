@@ -10,13 +10,6 @@ from .masks import ProcessorMasks
 from .operations import ProcessorOperations
 
 ############################################################
-
-BIT_COUNT = 8
-constants = ProcessorConstants(BIT_COUNT)
-masks = ProcessorMasks(constants)
-operations = ProcessorOperations(constants, masks)
-
-############################################################
 #   CPU
 ############################################################
 
@@ -24,15 +17,17 @@ operations = ProcessorOperations(constants, masks)
 class CPU:
     """Main CPU class."""
 
-    ############################################################
+    CONSTANTS = ProcessorConstants(8)
+    MASKS = ProcessorMasks(CONSTANTS)
+    OPERATIONS = ProcessorOperations(CONSTANTS, MASKS)
 
     def __init__(self):
         """Construct a new CPU."""
 
-        self.register = [0] * constants.BIT_COUNT
-        self.register[constants.BIT_COUNT - 1] = 0xF4
+        self.register = [0] * CPU.CONSTANTS.BIT_COUNT
+        self.register[CPU.CONSTANTS.BIT_COUNT - 1] = 0xF4
 
-        self.memory = [0] * constants.WORD_SIZE
+        self.memory = [0] * CPU.CONSTANTS.WORD_SIZE
 
         self.program_pointer = 0
         self.stack_pointer = 0
@@ -45,7 +40,7 @@ class CPU:
 
     def format_value(self, value):
 
-        return constants.format_as_hex(value)
+        return CPU.CONSTANTS.format_as_hex(value)
 
     def format_iterable(self, *args):
 
@@ -61,7 +56,7 @@ class CPU:
     def write_register(self, address, value):
         """Write the `value` to the provided `address` in the register."""
 
-        self.register[address] = masks.word_mask(value)
+        self.register[address] = CPU.MASKS.word_mask(value)
 
         return
 
@@ -75,7 +70,7 @@ class CPU:
     def write_memory(self, address, value):
         """Write the `value` to the provided `address` in the memory."""
 
-        self.memory[address] = masks.word_mask(value)
+        self.memory[address] = CPU.MASKS.word_mask(value)
 
         return
 
@@ -150,64 +145,64 @@ class CPU:
 
     @property
     def flag_eq(self):
-        return masks.is_masked_by(self.flags, masks.FLAG_EQ)
+        return CPU.MASKS.is_masked_by(self.flags, CPU.MASKS.FLAG_EQ)
 
     @flag_eq.setter
     def flag_eq(self, value):
-        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_EQ)
+        self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_EQ)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_gt(self):
-        return masks.is_masked_by(self.flags, masks.FLAG_GT)
+        return CPU.MASKS.is_masked_by(self.flags, CPU.MASKS.FLAG_GT)
 
     @flag_gt.setter
     def flag_gt(self, value):
-        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_GT)
+        self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_GT)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_lt(self):
-        return masks.is_masked_by(self.flags, masks.FLAG_LT)
+        return CPU.MASKS.is_masked_by(self.flags, CPU.MASKS.FLAG_LT)
 
     @flag_lt.setter
     def flag_lt(self, value):
-        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_LT)
+        self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_LT)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_neq(self):
-        return masks.is_masked_by(self.flags, masks.FLAG_NEQ)
+        return CPU.MASKS.is_masked_by(self.flags, CPU.MASKS.FLAG_NEQ)
 
     @flag_neq.setter
     def flag_neq(self, value):
-        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_NEQ)
+        self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_NEQ)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_ngt(self):
-        return masks.is_masked_by(self.flags, masks.FLAG_NGT)
+        return CPU.MASKS.is_masked_by(self.flags, CPU.MASKS.FLAG_NGT)
 
     @flag_ngt.setter
     def flag_ngt(self, value):
-        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_NGT)
+        self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_NGT)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_nlt(self):
-        return masks.is_masked_by(self.flags, masks.FLAG_NLT)
+        return CPU.MASKS.is_masked_by(self.flags, CPU.MASKS.FLAG_NLT)
 
     @flag_nlt.setter
     def flag_nlt(self, value):
-        self.flags = masks.toggle_masked(value, self.flags, masks.FLAG_NLT)
+        self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_NLT)
         return
