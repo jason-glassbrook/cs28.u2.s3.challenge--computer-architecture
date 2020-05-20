@@ -35,15 +35,23 @@ class CPU:
         """
 
         self.register = [0] * CPU.CONSTANTS.BIT_COUNT
-        self.register[CPU.CONSTANTS.BIT_COUNT - 1] = 0xF4
-
         self.memory = [0] * CPU.CONSTANTS.WORD_SIZE
-
-        self.program_pointer = 0
-        self.stack_pointer = 0
-
         self.flags = 0
 
+        self.program_pointer = 0
+        self.stack_pointer = 0xF4
+
+        return
+
+    #-----------------------------------------------------------
+
+    @property
+    def stack_pointer(self):
+        return self.register[CPU.CONSTANTS.REGISTER_OF_STACK_POINTER]
+
+    @stack_pointer.setter
+    def stack_pointer(self, value):
+        self.register[CPU.CONSTANTS.REGISTER_OF_STACK_POINTER] = value
         return
 
     #-----------------------------------------------------------
