@@ -5,9 +5,9 @@
 import sys
 import math
 
-from .constants import ProcessorConstants
-from .masks import ProcessorMasks
-from .operations import ProcessorOperations
+from .cpu__constants import ProcessorConstants
+from .cpu__masks import ProcessorMasks
+from .cpu__operations import ProcessorOperations
 
 ############################################################
 #   CPU

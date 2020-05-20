@@ -4,7 +4,7 @@ Generate operations for the LS-8 CPU.
 
 ############################################################
 
-from .masks import _block, _unblock
+from .cpu__masks import _block, _unblock
 
 ############################################################
 
