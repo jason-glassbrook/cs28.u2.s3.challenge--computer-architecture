@@ -7,12 +7,14 @@ import math
 
 from .constants import ProcessorConstants
 from .masks import ProcessorMasks
+from .operations import ProcessorOperations
 
 ############################################################
 
 BIT_COUNT = 8
 constants = ProcessorConstants(BIT_COUNT)
 masks = ProcessorMasks(constants)
+operations = ProcessorOperations(constants, masks)
 
 ############################################################
 #   CPU
