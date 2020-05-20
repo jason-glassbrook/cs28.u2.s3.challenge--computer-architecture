@@ -54,6 +54,24 @@ class CPU:
         self.register[CPU.CONSTANTS.REGISTER_OF_STACK_POINTER] = value
         return
 
+    @property
+    def interrupt_status(self):
+        return self.register[CPU.CONSTANTS.REGISTER_OF_STACK_POINTER]
+
+    @interrupt_status.setter
+    def interrupt_status(self, value):
+        self.register[CPU.CONSTANTS.REGISTER_OF_STACK_POINTER] = value
+        return
+
+    @property
+    def interrupt_mask(self):
+        return self.register[CPU.CONSTANTS.REGISTER_OF_STACK_POINTER]
+
+    @interrupt_mask.setter
+    def interrupt_mask(self, value):
+        self.register[CPU.CONSTANTS.REGISTER_OF_STACK_POINTER] = value
+        return
+
     #-----------------------------------------------------------
 
     def format_value(self, value):

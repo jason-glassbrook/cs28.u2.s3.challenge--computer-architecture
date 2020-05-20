@@ -24,6 +24,8 @@ class ProcessorConstants:
         self.WORD_SIZE = 2 ** self.BIT_COUNT
 
         self.REGISTER_OF_STACK_POINTER = self.BIT_COUNT - 1
+        self.REGISTER_OF_INTERRUPT_STATUS = self.REGISTER_OF_STACK_POINTER - 1
+        self.REGISTER_OF_INTERRUPT_MASK = self.REGISTER_OF_INTERRUPT_STATUS - 1
 
         # operations specification
 
