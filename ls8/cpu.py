@@ -5,6 +5,8 @@
 import sys
 import math
 
+from tools.printing import print_line, print_heading
+
 from .cpu__constants import ProcessorConstants
 from .cpu__masks import ProcessorMasks
 from .cpu__operations import ProcessorOperations
@@ -44,7 +46,7 @@ class CPU:
 
     def format_value(self, value):
 
-        return CPU.CONSTANTS.format_as_hex(value)
+        return CPU.CONSTANTS.format_as_bin(value)
 
     def format_iterable(self, *args):
 
@@ -94,8 +96,7 @@ class CPU:
         """
 
         # For now, we've just hardcoded a program:
-
-        self.program = [
+        program = [
             # From print8.ls8
             0b10000010,  # LDI R0,8
             0b00000000,
@@ -104,6 +105,11 @@ class CPU:
             0b00000000,
             0b00000001,  # HLT
         ]
+
+        print_heading("writing program to memory...", width=40)
+        for (i, word) in enumerate(program):
+            self.write_memory(i, word)
+            print("{} -> {}".format(*self.format_iterable(i, word)))
 
         return
 
