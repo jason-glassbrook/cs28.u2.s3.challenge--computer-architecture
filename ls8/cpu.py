@@ -219,7 +219,7 @@ class CPU:
                 operation = self.OPERATIONS[word]
                 print(" <operation: {}>".format(operation["name"]), end="")
 
-                if operation["code_name"] == "HLT":
+                if operation["name"] == "HALT":
 
                     self.stop()
 

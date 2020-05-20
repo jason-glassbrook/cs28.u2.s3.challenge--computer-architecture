@@ -10,7 +10,7 @@ from .cpu__masks import _block, _unblock
 
 OPERATIONS = {
     0b00000000: {
-        "name": "NO OPERATION",
+        "name": "NO_OPERATION",
         "code_name": "NOP",
     },
     0b00000001: {
@@ -18,11 +18,11 @@ OPERATIONS = {
         "code_name": "HLT",
     },
     0b00010001: {
-        "name": "RETURN FROM CALL",
+        "name": "RETURN_FROM_CALL",
         "code_name": "RET",
     },
     0b00010011: {
-        "name": "RETURN FROM INTERRUPT",
+        "name": "RETURN_FROM_INTERRUPT",
         "code_name": "IRET",
     },
     0b01000101: {
@@ -34,11 +34,11 @@ OPERATIONS = {
         "code_name": "POP",
     },
     0b01000111: {
-        "name": "PRINT NUMBER",
+        "name": "PRINT_NUMBER",
         "code_name": "PRN",
     },
     0b01001000: {
-        "name": "PRINT ALPHA",
+        "name": "PRINT_ALPHA",
         "code_name": "PRA",
     },
     0b01010000: {
@@ -54,27 +54,27 @@ OPERATIONS = {
         "code_name": "JMP",
     },
     0b01010101: {
-        "name": "JUMP WHEN FLAGGED EQUAL",
+        "name": "JUMP_WHEN_FLAGGED_EQUAL",
         "code_name": "JEQ",
     },
     0b01010110: {
-        "name": "JUMP WHEN FLAGGED NOT EQUAL",
+        "name": "JUMP_WHEN_FLAGGED_NOT_EQUAL",
         "code_name": "JNE",
     },
     0b01010111: {
-        "name": "JUMP WHEN FLAGGED GREATER THAN",
+        "name": "JUMP_WHEN_FLAGGED_GREATER_THAN",
         "code_name": "JGT",
     },
     0b01011000: {
-        "name": "JUMP WHEN FLAGGED LESS THAN",
+        "name": "JUMP_WHEN_FLAGGED_LESS_THAN",
         "code_name": "JLT",
     },
     0b01011001: {
-        "name": "JUMP WHEN FLAGGED LESS THAN OR EQUAL",
+        "name": "JUMP_WHEN_FLAGGED_LESS_THAN_OR_EQUAL",
         "code_name": "JLE",
     },
     0b01011010: {
-        "name": "JUMP WHEN FLAGGED GREATER THAN OR EQUAL",
+        "name": "JUMP_WHEN_FLAGGED_GREATER_THAN_OR_EQUAL",
         "code_name": "JGE",
     },
     0b01100101: {
@@ -86,11 +86,11 @@ OPERATIONS = {
         "code_name": "DEC",
     },
     0b01101001: {
-        "name": "BITWISE NOT",
+        "name": "BITWISE_NOT",
         "code_name": "NOT",
     },
     0b10000010: {
-        "name": "LOAD IMMEDIATE",
+        "name": "LOAD_IMMEDIATE",
         "code_name": "LDI",
     },
     0b10000011: {
@@ -126,23 +126,23 @@ OPERATIONS = {
         "code_name": "CMP",
     },
     0b10101000: {
-        "name": "BITWISE AND",
+        "name": "BITWISE_AND",
         "code_name": "AND",
     },
     0b10101010: {
-        "name": "BITWISE OR",
+        "name": "BITWISE_OR",
         "code_name": "OR",
     },
     0b10101011: {
-        "name": "BITWISE XOR",
+        "name": "BITWISE_XOR",
         "code_name": "XOR",
     },
     0b10101100: {
-        "name": "BITWISE SHIFT LEFT",
+        "name": "BITWISE_SHIFT_LEFT",
         "code_name": "SHL",
     },
     0b10101101: {
-        "name": "BITWISE SHIFT RIGHT",
+        "name": "BITWISE_SHIFT_RIGHT",
         "code_name": "SHR",
     },
 }
