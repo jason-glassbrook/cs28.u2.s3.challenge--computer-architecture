@@ -20,18 +20,18 @@ def normpath_join(*args):
 ############################################################
 
 args = sys.argv
-print(args)
+# print(args)
 
 current_dir = os.getcwd()
-print(current_dir)
+# print(current_dir)
 project_dir = normpath_join(args[0], "../../")
-print(project_dir)
+# print(project_dir)
 examples_dir = normpath_join(project_dir, "./ls8/examples")
-print(examples_dir)
+# print(examples_dir)
 examples_ext = ".ls8"
-print(examples_ext)
+# print(examples_ext)
 program_file = None
-print(program_file)
+# print(program_file)
 
 if args[1] == "--example" or args[1] == "-e":
 
@@ -53,7 +53,7 @@ else:
     program_file = args[1]
     program_file = normpath_join(project_dir, program_file)
 
-print(program_file)
+# print(program_file)
 
 #-----------------------------------------------------------
 
