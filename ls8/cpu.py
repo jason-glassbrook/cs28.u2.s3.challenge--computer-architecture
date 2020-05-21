@@ -751,31 +751,31 @@ class CPU:
 
     @property
     def flag_neq(self):
-        return CPU.MASKS.is_masked_by(self.flags, CPU.MASKS.FLAG_NEQ)
+        return (not self.flag_eq)
 
     @flag_neq.setter
     def flag_neq(self, value):
-        self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_NEQ)
+        self.flag_eq(not value)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_ngt(self):
-        return CPU.MASKS.is_masked_by(self.flags, CPU.MASKS.FLAG_NGT)
+        return (not self.flag_gt)
 
     @flag_ngt.setter
     def flag_ngt(self, value):
-        self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_NGT)
+        self.flag_lt(not value)
         return
 
     #-----------------------------------------------------------
 
     @property
     def flag_nlt(self):
-        return CPU.MASKS.is_masked_by(self.flags, CPU.MASKS.FLAG_NLT)
+        return (not self.flag_lt)
 
     @flag_nlt.setter
     def flag_nlt(self, value):
-        self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_NLT)
+        self.flag_gt(not value)
         return
