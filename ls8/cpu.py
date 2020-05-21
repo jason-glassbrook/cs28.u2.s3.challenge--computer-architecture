@@ -381,8 +381,17 @@ class CPU:
     def __INTERRUPT(self):
         pass
 
-    def __JUMP(self):
-        pass
+    def JUMP(self):
+
+        pp = self.program_pointer
+
+        reg_a = self.read_memory(pp + 1)
+
+        mem_a = self.read_register(reg_a)
+
+        self.program_pointer = mem_a
+
+        return
 
     def __JUMP_WHEN_FLAGGED_EQUAL(self):
         pass
