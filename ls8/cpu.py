@@ -224,7 +224,11 @@ class CPU:
                 if operation_fun:
 
                     print_on(" | running...")
+
                     operation_fun()
+
+                    if not operation["sets_pointer"]:
+                        self.program_pointer += (1 + operation["args"])
 
                 else:
 
@@ -235,8 +239,6 @@ class CPU:
 
                 print_on("unknown | stopping...")
                 self.stop()
-
-            self.program_pointer += 1
 
             print_on(" ]-")
             print()
