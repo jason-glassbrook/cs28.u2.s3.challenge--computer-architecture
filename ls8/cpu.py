@@ -449,17 +449,39 @@ class CPU:
         pp = self.program_pointer
 
         reg_a = self.read_memory(pp + 1)
-        value = self.read_memory(pp + 2)
+        value_b = self.read_memory(pp + 2)
 
-        self.write_register(reg_a, value)
+        self.write_register(reg_a, value_b)
 
         return
 
-    def __LOAD(self):
-        pass
+    def LOAD(self):
 
-    def __STORE(self):
-        pass
+        pp = self.program_pointer
+
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        mem_b = self.read_register(reg_b)
+        value_b = self.read_memory(mem_b)
+
+        self.write_register(reg_a, value_b)
+
+        return
+
+    def STORE(self):
+
+        pp = self.program_pointer
+
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        mem_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        self.write_memory(mem_a, value_b)
+
+        return
 
     def ADD(self):
 
