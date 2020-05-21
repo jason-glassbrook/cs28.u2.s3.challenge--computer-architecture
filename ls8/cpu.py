@@ -378,14 +378,47 @@ class CPU:
     def __JUMP_WHEN_FLAGGED_GREATER_THAN_OR_EQUAL(self):
         pass
 
-    def __INCREMENT(self):
-        pass
+    def INCREMENT(self):
 
-    def __DECREMENT(self):
-        pass
+        pp = self.program_pointer
 
-    def __BITWISE_NOT(self):
-        pass
+        reg_a = self.read_memory(pp + 1)
+
+        value_a = self.read_register(reg_a)
+
+        result = value_a + 1
+
+        self.write_register(reg_a, result)
+
+        return
+
+    def DECREMENT(self):
+
+        pp = self.program_pointer
+
+        reg_a = self.read_memory(pp + 1)
+
+        value_a = self.read_register(reg_a)
+
+        result = value_a - 1
+
+        self.write_register(reg_a, result)
+
+        return
+
+    def BITWISE_NOT(self):
+
+        pp = self.program_pointer
+
+        reg_a = self.read_memory(pp + 1)
+
+        value_a = self.read_register(reg_a)
+
+        result = CPU.MASKS.WORD - value_a
+
+        self.write_register(reg_a, result)
+
+        return
 
     def LOAD_IMMEDIATE(self):
 
