@@ -54,27 +54,27 @@ OPERATIONS = {
         "code_name": "JMP",
     },
     0b01010101: {
-        "name": "JUMP_WHEN_FLAGGED_EQUAL",
+        "name": "JUMP_WHEN_FLAG_EQ",
         "code_name": "JEQ",
     },
     0b01010110: {
-        "name": "JUMP_WHEN_FLAGGED_NOT_EQUAL",
+        "name": "JUMP_WHEN_FLAG_NEQ",
         "code_name": "JNE",
     },
     0b01010111: {
-        "name": "JUMP_WHEN_FLAGGED_GREATER_THAN",
+        "name": "JUMP_WHEN_FLAG_GT",
         "code_name": "JGT",
     },
     0b01011000: {
-        "name": "JUMP_WHEN_FLAGGED_LESS_THAN",
+        "name": "JUMP_WHEN_FLAG_LT",
         "code_name": "JLT",
     },
     0b01011001: {
-        "name": "JUMP_WHEN_FLAGGED_NOT_GREATER_THAN",
+        "name": "JUMP_WHEN_FLAG_NGT",
         "code_name": "JLE",
     },
     0b01011010: {
-        "name": "JUMP_WHEN_FLAGGED_NOT_LESS_THAN",
+        "name": "JUMP_WHEN_FLAG_NLT",
         "code_name": "JGE",
     },
     0b01100101: {
