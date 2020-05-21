@@ -298,7 +298,7 @@ class CPU:
     def PRINT_NUMBER(self):
 
         pp = self.program_pointer
-        reg_a = self.read_register(pp + 1)
+        reg_a = self.read_memory(pp + 1)
 
         number = self.read_register(reg_a)
 
@@ -309,8 +309,8 @@ class CPU:
     def LOAD_IMMEDIATE(self):
 
         pp = self.program_pointer
-        reg_a = self.read_register(pp + 1)
-        value = self.read_register(pp + 2)
+        reg_a = self.read_memory(pp + 1)
+        value = self.read_memory(pp + 2)
 
         self.write_register(reg_a, value)
 
