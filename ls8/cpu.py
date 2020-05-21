@@ -391,6 +391,81 @@ class CPU:
 
         return
 
+    def BITWISE_AND(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        result = value_a & value_b
+
+        self.write_register(reg_a, result)
+
+        return
+
+    def BITWISE_OR(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        result = value_a | value_b
+
+        self.write_register(reg_a, result)
+
+        return
+
+    def BITWISE_XOR(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        result = value_a ^ value_b
+
+        self.write_register(reg_a, result)
+
+        return
+
+    def BITWISE_SHIFT_LEFT(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        result = value_a << value_b
+
+        self.write_register(reg_a, result)
+
+        return
+
+    def BITWISE_SHIFT_RIGHT(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        result = value_a >> value_b
+
+        self.write_register(reg_a, result)
+
+        return
+
     ############################################################
     #   PROPERTIES
     ############################################################
