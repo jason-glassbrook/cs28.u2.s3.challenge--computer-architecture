@@ -34,10 +34,12 @@ class CPU:
 
     #-----------------------------------------------------------
 
-    def __init__(self):
+    def __init__(self, debug=False):
         """
         Construct a new CPU.
         """
+
+        self.debug = debug
 
         self.register = [0] * CPU.CONSTANTS.BIT_COUNT
         self.memory = [0] * CPU.CONSTANTS.WORD_SIZE
@@ -163,8 +165,9 @@ class CPU:
         Load a program into memory.
         """
 
-        print()
-        print_heading("reading program from file...", width=40)
+        if self.debug:
+            print()
+            print_heading("reading program from file...", width=40)
 
         program = []
 
@@ -178,15 +181,20 @@ class CPU:
 
                     word = int(line_str, base=2)
                     program.append(word)
-                    print(self.format_value(word))
 
-        print()
-        print_heading("writing program to memory...", width=40)
+                    if self.debug:
+                        print(self.format_value(word))
+
+        if self.debug:
+            print()
+            print_heading("writing program to memory...", width=40)
 
         for (i, word) in enumerate(program):
 
             self.write_memory(i, word)
-            print("[{}]: {}".format(*self.format_iterable(i, word)))
+
+            if self.debug:
+                print("[{}]: {}".format(*self.format_iterable(i, word)))
 
         return
 
@@ -207,25 +215,29 @@ class CPU:
 
         self.start()
 
-        print()
-        print_heading("running program from memory...", width=40)
-        print()
+        if self.debug:
+            print()
+            print_heading("running program from memory...", width=40)
+            print()
 
         while self.should_continue:
 
             word = self.read_memory(self.program_pointer)
-            print(self.format_value(word))
+
+            if self.debug:
+                print(self.format_value(word))
 
             if word in self.OPERATIONS:
 
                 operation = self.OPERATIONS[word]
 
-                print_dent(
-                    "operation: {} ({})".format(
-                        operation["name"],
-                        operation["code_name"],
+                if self.debug:
+                    print_dent(
+                        "operation: {} ({})".format(
+                            operation["name"],
+                            operation["code_name"],
+                        )
                     )
-                )
 
                 # get the operation's function:
                 operation_fun = getattr(self, operation["name"], None)
@@ -233,8 +245,9 @@ class CPU:
                 # run the operation or stop
                 if operation_fun:
 
-                    print_dent("running...")
-                    print_dent(end="")
+                    if self.debug:
+                        print_dent("running...")
+                        print_dent(end="")
 
                     operation_fun()
 
@@ -243,20 +256,24 @@ class CPU:
 
                 else:
 
-                    print_dent("not implemented")
-                    print_dent("stopping...")
-                    self.stop()
+                    if self.debug:
+                        print_dent("not implemented")
+                        print_dent("stopping...")
+                        self.stop()
 
             else:
 
-                print_dent("unknown")
-                print_dent("stopping...")
-                self.stop()
+                if self.debug:
+                    print_dent("unknown")
+                    print_dent("stopping...")
+                    self.stop()
 
-            print()
+            if self.debug:
+                print()
 
-        print_line(width=40)
-        print("done.")
+        if self.debug:
+            print_line(width=40)
+            print("done.")
 
         return
 
