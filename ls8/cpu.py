@@ -301,13 +301,13 @@ class CPU:
 
         reg_a = self.read_memory(pp + 1)
 
-        value = self.read_register(reg_a)
+        value_a = self.read_register(reg_a)
 
         self.stack_pointer += 1
 
         sp = self.stack_pointer
 
-        self.write_memory(sp, value)
+        self.write_memory(sp, value_a)
 
         return
 
@@ -315,7 +315,7 @@ class CPU:
 
         sp = self.stack_pointer
 
-        value = self.read_memory(sp)
+        value_s = self.read_memory(sp)
 
         self.stack_pointer -= 1
 
@@ -323,7 +323,7 @@ class CPU:
 
         reg_a = self.read_memory(pp + 1)
 
-        self.write_register(reg_a, value)
+        self.write_register(reg_a, value_s)
 
         return
 
@@ -333,9 +333,9 @@ class CPU:
 
         reg_a = self.read_memory(pp + 1)
 
-        value = self.read_register(reg_a)
+        value_a = self.read_register(reg_a)
 
-        print(value)
+        print(value_a)
 
         return
 
@@ -345,9 +345,9 @@ class CPU:
 
         reg_a = self.read_memory(pp + 1)
 
-        value = self.read_register(reg_a)
+        value_a = self.read_register(reg_a)
 
-        print(chr(value))
+        print(chr(value_a))
 
         return
 
