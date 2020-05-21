@@ -722,7 +722,7 @@ class CPU:
 
     @flag_eq.setter
     def flag_eq(self, value):
-        self.flags = CPU.MASKS.turn_off_masked(self.flags, CPU.MASKS.FLAG_COMPARE)
+        # self.flags = CPU.MASKS.turn_off_masked(self.flags, CPU.MASKS.FLAG_COMPARE)
         self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_EQ)
         return
 
@@ -734,7 +734,7 @@ class CPU:
 
     @flag_gt.setter
     def flag_gt(self, value):
-        self.flags = CPU.MASKS.turn_off_masked(self.flags, CPU.MASKS.FLAG_COMPARE)
+        # self.flags = CPU.MASKS.turn_off_masked(self.flags, CPU.MASKS.FLAG_COMPARE)
         self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_GT)
         return
 
@@ -746,7 +746,7 @@ class CPU:
 
     @flag_lt.setter
     def flag_lt(self, value):
-        self.flags = CPU.MASKS.turn_off_masked(self.flags, CPU.MASKS.FLAG_COMPARE)
+        # self.flags = CPU.MASKS.turn_off_masked(self.flags, CPU.MASKS.FLAG_COMPARE)
         self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_LT)
         return
 
@@ -758,7 +758,7 @@ class CPU:
 
     @flag_neq.setter
     def flag_neq(self, value):
-        self.flag_eq(not value)
+        self.flag_eq = (not value)
         return
 
     #-----------------------------------------------------------
@@ -769,7 +769,7 @@ class CPU:
 
     @flag_ngt.setter
     def flag_ngt(self, value):
-        self.flag_lt(not value)
+        self.flag_lt = (not value)
         return
 
     #-----------------------------------------------------------
@@ -780,5 +780,5 @@ class CPU:
 
     @flag_nlt.setter
     def flag_nlt(self, value):
-        self.flag_gt(not value)
+        self.flag_gt = (not value)
         return
