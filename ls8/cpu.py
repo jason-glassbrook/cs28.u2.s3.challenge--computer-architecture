@@ -221,21 +221,20 @@ class CPU:
                 operation_fun = getattr(self, operation["name"], None)
 
                 # run the operation or stop
-                print_on(" | ")
                 if operation_fun:
 
-                    print_on("running...")
+                    print_on(" | running...")
                     operation_fun()
 
                 else:
 
-                    print_on("not implemented")
-                    # self.stop()
+                    print_on(" | not implemented | stopping...")
+                    self.stop()
 
             else:
 
-                print_on("unknown")
-                # self.stop()
+                print_on("unknown | stopping...")
+                self.stop()
 
             self.program_pointer += 1
 
