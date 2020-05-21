@@ -9,6 +9,9 @@ import math
 
 DEFAULT__WIDTH = 20
 
+DEFAULT__DENT__COUNT = 1
+DEFAULT__DENT__DENTER = (" " * 2)
+
 DEFAULT__LINE__LINER = "-"
 DEFAULT__LINE__WIDTH = DEFAULT__WIDTH
 
@@ -26,6 +29,21 @@ NEWLINE = re.compile(r"[\r\n]+")
 def print_on(*args, **print_kwargs):
 
     print(*args, **print_kwargs, end="")
+
+    return
+
+
+def print_dent(
+    *args,
+    count=DEFAULT__DENT__COUNT,
+    denter=DEFAULT__DENT__DENTER,
+    **print_kwargs,
+):
+
+    dent = (denter * count)
+
+    print_on(dent)
+    print(*args, **print_kwargs)
 
     return
 
