@@ -274,6 +274,10 @@ class CPU:
 
         return
 
+    def NO_OPERATION(self):
+
+        return
+
     def HALT(self):
 
         self.stop()
