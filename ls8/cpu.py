@@ -268,7 +268,18 @@ class CPU:
         return
 
     def HALT(self):
+
         self.stop()
+        return
+
+    def LOAD_IMMEDIATE(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_register(pp + 1)
+        value = self.read_register(pp + 2)
+
+        self.write_register(reg_a, value)
+
         return
 
     ############################################################

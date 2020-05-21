@@ -13,7 +13,7 @@
 -   [x] Add RAM functions `read_memory()` and `write_memory()`
 -   [x] Implement the core of `run()`
 -   [x] Implement the `HLT` instruction handler
--   [ ] Add the `LDI` instruction
+-   [x] Add the `LDI` instruction
 -   [ ] Add the `PRN` instruction
 
 ### Day 2: Add the ability to load files dynamically, get `mult.ls8` running
