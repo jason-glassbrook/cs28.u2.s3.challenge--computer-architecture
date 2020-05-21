@@ -287,7 +287,7 @@ class CPU:
     def PRINT_ALPHA(self):
 
         pp = self.program_pointer
-        reg_a = self.read_register(pp + 1)
+        reg_a = self.read_memory(pp + 1)
 
         alpha = chr(self.read_register(reg_a))
 
