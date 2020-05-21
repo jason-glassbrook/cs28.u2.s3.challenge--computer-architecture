@@ -2,7 +2,7 @@
 
 ############################################################
 
-from tools.printing import (
+from tools.printers import (
     print_on,
     print_dent,
     print_line,
