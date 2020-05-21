@@ -289,8 +289,17 @@ class CPU:
 
         return
 
-    def __RETURN_FROM_CALL(self):
-        pass
+    def RETURN_FROM_CALL(self):
+
+        sp = self.stack_pointer
+
+        value_s = self.read_memory(sp)
+
+        self.stack_pointer -= 1
+
+        self.program_pointer = value_s
+
+        return
 
     def __RETURN_FROM_INTERRUPT(self):
         pass
@@ -351,8 +360,23 @@ class CPU:
 
         return
 
-    def __CALL(self):
-        pass
+    def CALL(self):
+
+        pp = self.program_pointer
+
+        reg_a = self.read_memory(pp + 1)
+
+        value_a = self.read_register(reg_a)
+
+        self.program_pointer = value_a
+
+        self.stack_pointer += 1
+
+        sp = self.stack_pointer
+
+        self.write_memory(sp, pp + 2)
+
+        return
 
     def __INTERRUPT(self):
         pass
