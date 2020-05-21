@@ -2,7 +2,11 @@
 #   NUMBERS
 ############################################################
 
-DEFAULT__ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+import string
+
+############################################################
+
+DEFAULT__ALPHABET = (string.digits + string.ascii_letters + "!?")
 DEFAULT__BASE = 10
 
 DEFAULT__INCLUDE_BASE = None    # None or 0, "before" or < 0, "after" or > 0
@@ -18,6 +22,9 @@ def int_as_base(
     base=DEFAULT__BASE,
     alphabet=DEFAULT__ALPHABET,
 ):
+
+    if base > len(alphabet):
+        raise Exception("int_as_base.BaseLargerThanAlphabet")
 
     result = ""
 
