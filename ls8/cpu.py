@@ -284,6 +284,38 @@ class CPU:
 
         return
 
+    def PUSH(self):
+
+        pp = self.program_pointer
+
+        reg_a = self.read_memory(pp + 1)
+
+        value = self.read_register(reg_a)
+
+        self.stack_pointer += 1
+
+        sp = self.stack_pointer
+
+        self.write_memory(sp, value)
+
+        return
+
+    def POP(self):
+
+        sp = self.stack_pointer
+
+        value = self.read_memory(sp)
+
+        self.stack_pointer -= 1
+
+        pp = self.program_pointer
+
+        reg_a = self.read_memory(pp + 1)
+
+        self.write_register(reg_a, value)
+
+        return
+
     def PRINT_ALPHA(self):
 
         pp = self.program_pointer
