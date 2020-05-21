@@ -57,6 +57,6 @@ else:
 
 #-----------------------------------------------------------
 
-cpu = CPU()
+cpu = CPU(debug=False)
 cpu.load(program_file)
 cpu.run()

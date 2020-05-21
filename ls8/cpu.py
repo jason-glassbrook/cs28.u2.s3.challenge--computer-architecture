@@ -407,45 +407,51 @@ class CPU:
 
         return
 
+    def __JUMP_WHEN(self, should_jump):
+
+        if should_jump:
+
+            self.JUMP()
+
+        else:
+
+            self.program_pointer += 2
+
+        return
+
     def JUMP_WHEN_FLAGGED_EQUAL(self):
 
-        if self.flag_eq:
-            self.JUMP()
+        self.__JUMP_WHEN(self.flag_eq)
 
         return
 
     def JUMP_WHEN_FLAGGED_NOT_EQUAL(self):
 
-        if self.flag_neq:
-            self.JUMP()
+        self.__JUMP_WHEN(self.flag_neq)
 
         return
 
     def JUMP_WHEN_FLAGGED_GREATER_THAN(self):
 
-        if self.flag_gt:
-            self.JUMP()
+        self.__JUMP_WHEN(self.flag_gt)
 
         return
 
     def JUMP_WHEN_FLAGGED_LESS_THAN(self):
 
-        if self.flag_lt:
-            self.JUMP()
+        self.__JUMP_WHEN(self.flag_lt)
 
         return
 
     def JUMP_WHEN_FLAGGED_NOT_GREATER_THAN(self):
 
-        if self.flag_ngt:
-            self.JUMP()
+        self.__JUMP_WHEN(self.flag_ngt)
 
         return
 
     def JUMP_WHEN_FLAGGED_NOT_LESS_THAN(self):
 
-        if self.flag_nlt:
-            self.JUMP()
+        self.__JUMP_WHEN(self.flag_nlt)
 
         return
 
