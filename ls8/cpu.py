@@ -287,28 +287,31 @@ class CPU:
     def PRINT_ALPHA(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
 
-        alpha = chr(self.read_register(reg_a))
+        value = self.read_register(reg_a)
 
-        print(alpha)
+        print(chr(value))
 
         return
 
     def PRINT_NUMBER(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
 
-        number = self.read_register(reg_a)
+        value = self.read_register(reg_a)
 
-        print(number)
+        print(value)
 
         return
 
     def LOAD_IMMEDIATE(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         value = self.read_memory(pp + 2)
 
@@ -319,6 +322,7 @@ class CPU:
     def ADD(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         reg_b = self.read_memory(pp + 2)
 
@@ -334,6 +338,7 @@ class CPU:
     def SUBTRACT(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         reg_b = self.read_memory(pp + 2)
 
@@ -349,6 +354,7 @@ class CPU:
     def MULTIPLY(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         reg_b = self.read_memory(pp + 2)
 
@@ -364,6 +370,7 @@ class CPU:
     def DIVIDE(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         reg_b = self.read_memory(pp + 2)
 
@@ -379,6 +386,7 @@ class CPU:
     def MODULO(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         reg_b = self.read_memory(pp + 2)
 
@@ -394,6 +402,7 @@ class CPU:
     def BITWISE_AND(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         reg_b = self.read_memory(pp + 2)
 
@@ -409,6 +418,7 @@ class CPU:
     def BITWISE_OR(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         reg_b = self.read_memory(pp + 2)
 
@@ -424,6 +434,7 @@ class CPU:
     def BITWISE_XOR(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         reg_b = self.read_memory(pp + 2)
 
@@ -439,6 +450,7 @@ class CPU:
     def BITWISE_SHIFT_LEFT(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         reg_b = self.read_memory(pp + 2)
 
@@ -454,6 +466,7 @@ class CPU:
     def BITWISE_SHIFT_RIGHT(self):
 
         pp = self.program_pointer
+
         reg_a = self.read_memory(pp + 1)
         reg_b = self.read_memory(pp + 2)
 
