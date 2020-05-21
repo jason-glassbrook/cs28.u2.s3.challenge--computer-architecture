@@ -60,6 +60,7 @@ class ProcessorMasks:
         self.FLAG_NEQ = self.FLAG_LT | self.FLAG_GT
         self.FLAG_NGT = self.FLAG_LT | self.FLAG_EQ
         self.FLAG_NLT = self.FLAG_EQ | self.FLAG_GT
+        self.FLAG_COMPARE = self.FLAG_EQ | self.FLAG_LT | self.FLAG_GT
 
         return
 

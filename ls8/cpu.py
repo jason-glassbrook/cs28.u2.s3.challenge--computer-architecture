@@ -722,6 +722,7 @@ class CPU:
 
     @flag_eq.setter
     def flag_eq(self, value):
+        self.flags = CPU.MASKS.turn_off_masked(self.flags, CPU.MASKS.FLAG_COMPARE)
         self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_EQ)
         return
 
@@ -733,6 +734,7 @@ class CPU:
 
     @flag_gt.setter
     def flag_gt(self, value):
+        self.flags = CPU.MASKS.turn_off_masked(self.flags, CPU.MASKS.FLAG_COMPARE)
         self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_GT)
         return
 
@@ -744,6 +746,7 @@ class CPU:
 
     @flag_lt.setter
     def flag_lt(self, value):
+        self.flags = CPU.MASKS.turn_off_masked(self.flags, CPU.MASKS.FLAG_COMPARE)
         self.flags = CPU.MASKS.toggle_masked(value, self.flags, CPU.MASKS.FLAG_LT)
         return
 
