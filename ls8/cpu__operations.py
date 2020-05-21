@@ -70,11 +70,11 @@ OPERATIONS = {
         "code_name": "JLT",
     },
     0b01011001: {
-        "name": "JUMP_WHEN_FLAGGED_LESS_THAN_OR_EQUAL",
+        "name": "JUMP_WHEN_FLAGGED_NOT_GREATER_THAN",
         "code_name": "JLE",
     },
     0b01011010: {
-        "name": "JUMP_WHEN_FLAGGED_GREATER_THAN_OR_EQUAL",
+        "name": "JUMP_WHEN_FLAGGED_NOT_LESS_THAN",
         "code_name": "JGE",
     },
     0b01100101: {
