@@ -541,8 +541,21 @@ class CPU:
 
         return
 
-    def __COMPARE(self):
-        pass
+    def COMPARE(self):
+
+        pp = self.program_pointer
+
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        self.flag_lt = (value_a < value_b)
+        self.flag_eq = (value_a == value_b)
+        self.flag_gt = (value_a > value_b)
+
+        return
 
     def BITWISE_AND(self):
 
