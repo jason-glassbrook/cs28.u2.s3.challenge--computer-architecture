@@ -321,6 +321,18 @@ class CPU:
 
         return
 
+    def PRINT_NUMBER(self):
+
+        pp = self.program_pointer
+
+        reg_a = self.read_memory(pp + 1)
+
+        value = self.read_register(reg_a)
+
+        print(value)
+
+        return
+
     def PRINT_ALPHA(self):
 
         pp = self.program_pointer
@@ -332,16 +344,6 @@ class CPU:
         print(chr(value))
 
         return
-
-    def PRINT_NUMBER(self):
-
-        pp = self.program_pointer
-
-        reg_a = self.read_memory(pp + 1)
-
-        value = self.read_register(reg_a)
-
-        print(value)
 
         return
 
