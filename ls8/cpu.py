@@ -220,7 +220,12 @@ class CPU:
 
                 operation = self.OPERATIONS[word]
 
-                print_dent("operation: {}".format(operation["name"]))
+                print_dent(
+                    "operation: {} ({})".format(
+                        operation["name"],
+                        operation["code_name"],
+                    )
+                )
 
                 # get the operation's function:
                 operation_fun = getattr(self, operation["name"], None)
