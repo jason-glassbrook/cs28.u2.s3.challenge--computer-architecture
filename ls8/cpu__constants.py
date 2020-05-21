@@ -57,6 +57,10 @@ class ProcessorConstants:
 
         return
 
+    def __str__(self):
+
+        return str(self.__dict__)
+
     def _format_as_base(self, number, base, width):
 
         base_str = f"{BEFORE_BASE}{base}{AFTER_BASE}"

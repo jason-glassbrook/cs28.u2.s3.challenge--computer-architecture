@@ -183,6 +183,10 @@ class ProcessorOperations:
 
         return
 
+    def __str__(self):
+
+        return str(self.__dict__)
+
     def __getitem__(self, key):
 
         return self.operations[key]
