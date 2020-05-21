@@ -280,16 +280,6 @@ class CPU:
 
         return
 
-    def LOAD_IMMEDIATE(self):
-
-        pp = self.program_pointer
-        reg_a = self.read_register(pp + 1)
-        value = self.read_register(pp + 2)
-
-        self.write_register(reg_a, value)
-
-        return
-
     def PRINT_ALPHA(self):
 
         pp = self.program_pointer
@@ -309,6 +299,16 @@ class CPU:
         number = self.read_register(reg_a)
 
         print(number)
+
+        return
+
+    def LOAD_IMMEDIATE(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_register(pp + 1)
+        value = self.read_register(pp + 2)
+
+        self.write_register(reg_a, value)
 
         return
 
