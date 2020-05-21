@@ -277,6 +277,7 @@ class CPU:
     def HALT(self):
 
         self.stop()
+
         return
 
     def LOAD_IMMEDIATE(self):
@@ -293,9 +294,10 @@ class CPU:
 
         pp = self.program_pointer
         reg_a = self.read_register(pp + 1)
-        value = self.read_register(reg_a)
 
-        print(value)
+        number = self.read_register(reg_a)
+
+        print(number)
 
         return
 
