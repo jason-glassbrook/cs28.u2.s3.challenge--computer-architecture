@@ -114,7 +114,7 @@ OPERATIONS = {
         "code_name": "MUL",
     },
     0b10100011: {
-        "name": "DIVISION",
+        "name": "DIVIDE",
         "code_name": "DIV",
     },
     0b10100100: {
