@@ -393,23 +393,47 @@ class CPU:
 
         return
 
-    def __JUMP_WHEN_FLAGGED_EQUAL(self):
-        pass
+    def JUMP_WHEN_FLAGGED_EQUAL(self):
 
-    def __JUMP_WHEN_FLAGGED_NOT_EQUAL(self):
-        pass
+        if self.flag_eq:
+            self.JUMP()
 
-    def __JUMP_WHEN_FLAGGED_GREATER_THAN(self):
-        pass
+        return
 
-    def __JUMP_WHEN_FLAGGED_LESS_THAN(self):
-        pass
+    def JUMP_WHEN_FLAGGED_NOT_EQUAL(self):
 
-    def __JUMP_WHEN_FLAGGED_LESS_THAN_OR_EQUAL(self):
-        pass
+        if self.flag_neq:
+            self.JUMP()
 
-    def __JUMP_WHEN_FLAGGED_GREATER_THAN_OR_EQUAL(self):
-        pass
+        return
+
+    def JUMP_WHEN_FLAGGED_GREATER_THAN(self):
+
+        if self.flag_gt:
+            self.JUMP()
+
+        return
+
+    def JUMP_WHEN_FLAGGED_LESS_THAN(self):
+
+        if self.flag_lt:
+            self.JUMP()
+
+        return
+
+    def JUMP_WHEN_FLAGGED_NOT_GREATER_THAN(self):
+
+        if self.flag_ngt:
+            self.JUMP()
+
+        return
+
+    def JUMP_WHEN_FLAGGED_NOT_LESS_THAN(self):
+
+        if self.flag_nlt:
+            self.JUMP()
+
+        return
 
     def INCREMENT(self):
 
