@@ -2,9 +2,6 @@
 
 ############################################################
 
-import sys
-import math
-
 from tools.printing import (
     print_on,
     print_dent,
