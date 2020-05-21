@@ -259,20 +259,20 @@ class CPU:
     #   OPERATIONS
     ############################################################
 
-    def alu(self, op, reg_a, reg_b):
-        """
-        ALU operations.
-        """
+    # def alu(self, op, reg_a, reg_b):
+    #     """
+    #     ALU operations.
+    #     """
 
-        if op == "ADD":
-            value_a = self.read_register(reg_a)
-            value_b = self.read_register(reg_b)
-            self.write_register(reg_a, value_a + value_b)
-        # elif op == "SUB": etc
-        else:
-            raise Exception("Unsupported ALU operation")
+    #     if op == "ADD":
+    #         value_a = self.read_register(reg_a)
+    #         value_b = self.read_register(reg_b)
+    #         self.write_register(reg_a, value_a + value_b)
+    #     # elif op == "SUB": etc
+    #     else:
+    #         raise Exception("Unsupported ALU operation")
 
-        return
+    #     return
 
     def NO_OPERATION(self):
 
@@ -313,6 +313,81 @@ class CPU:
         value = self.read_memory(pp + 2)
 
         self.write_register(reg_a, value)
+
+        return
+
+    def ADD(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        result = value_a + value_b
+
+        self.write_register(reg_a, result)
+
+        return
+
+    def SUBTRACT(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        result = value_a - value_b
+
+        self.write_register(reg_a, result)
+
+        return
+
+    def MULTIPLY(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        result = value_a * value_b
+
+        self.write_register(reg_a, result)
+
+        return
+
+    def DIVIDE(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        result = value_a // value_b
+
+        self.write_register(reg_a, result)
+
+        return
+
+    def MODULO(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_memory(pp + 1)
+        reg_b = self.read_memory(pp + 2)
+
+        value_a = self.read_register(reg_a)
+        value_b = self.read_register(reg_b)
+
+        result = value_a % value_b
+
+        self.write_register(reg_a, result)
 
         return
 
