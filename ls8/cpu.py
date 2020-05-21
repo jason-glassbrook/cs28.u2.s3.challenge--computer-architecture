@@ -5,7 +5,12 @@
 import sys
 import math
 
-from tools.printing import print_on, print_line, print_heading
+from tools.printing import (
+    print_on,
+    print_dent,
+    print_line,
+    print_heading,
+)
 
 from .cpu__constants import ProcessorConstants
 from .cpu__masks import ProcessorMasks
@@ -204,18 +209,18 @@ class CPU:
 
         print()
         print_heading("running program from memory...", width=40)
+        print()
 
         while self.should_continue:
 
             word = self.read_memory(self.program_pointer)
-            print_on(self.format_value(word))
-            print_on(" -[ ")
+            print(self.format_value(word))
 
             if word in self.OPERATIONS:
 
                 operation = self.OPERATIONS[word]
 
-                print_on("operation: {}".format(operation["name"]))
+                print_dent("operation: {}".format(operation["name"]))
 
                 # get the operation's function:
                 operation_fun = getattr(self, operation["name"], None)
@@ -223,7 +228,8 @@ class CPU:
                 # run the operation or stop
                 if operation_fun:
 
-                    print_on(" | running...")
+                    print_dent("running...")
+                    print_dent(end="")
 
                     operation_fun()
 
@@ -232,15 +238,16 @@ class CPU:
 
                 else:
 
-                    print_on(" | not implemented | stopping...")
+                    print_dent("not implemented")
+                    print_dent("stopping...")
                     self.stop()
 
             else:
 
-                print_on("unknown | stopping...")
+                print_dent("unknown")
+                print_dent("stopping...")
                 self.stop()
 
-            print_on(" ]-")
             print()
 
         print_line(width=40)
