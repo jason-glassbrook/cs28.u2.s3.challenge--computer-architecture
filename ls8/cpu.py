@@ -289,6 +289,12 @@ class CPU:
 
         return
 
+    def __RETURN_FROM_CALL(self):
+        pass
+
+    def __RETURN_FROM_INTERRUPT(self):
+        pass
+
     def PUSH(self):
 
         pp = self.program_pointer
@@ -345,7 +351,41 @@ class CPU:
 
         return
 
-        return
+    def __CALL(self):
+        pass
+
+    def __INTERRUPT(self):
+        pass
+
+    def __JUMP(self):
+        pass
+
+    def __JUMP_WHEN_FLAGGED_EQUAL(self):
+        pass
+
+    def __JUMP_WHEN_FLAGGED_NOT_EQUAL(self):
+        pass
+
+    def __JUMP_WHEN_FLAGGED_GREATER_THAN(self):
+        pass
+
+    def __JUMP_WHEN_FLAGGED_LESS_THAN(self):
+        pass
+
+    def __JUMP_WHEN_FLAGGED_LESS_THAN_OR_EQUAL(self):
+        pass
+
+    def __JUMP_WHEN_FLAGGED_GREATER_THAN_OR_EQUAL(self):
+        pass
+
+    def __INCREMENT(self):
+        pass
+
+    def __DECREMENT(self):
+        pass
+
+    def __BITWISE_NOT(self):
+        pass
 
     def LOAD_IMMEDIATE(self):
 
@@ -357,6 +397,12 @@ class CPU:
         self.write_register(reg_a, value)
 
         return
+
+    def __LOAD(self):
+        pass
+
+    def __STORE(self):
+        pass
 
     def ADD(self):
 
@@ -437,6 +483,9 @@ class CPU:
         self.write_register(reg_a, result)
 
         return
+
+    def __COMPARE(self):
+        pass
 
     def BITWISE_AND(self):
 
