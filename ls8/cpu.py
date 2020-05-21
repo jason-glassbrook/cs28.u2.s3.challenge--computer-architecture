@@ -289,6 +289,16 @@ class CPU:
 
         return
 
+    def PRINT_NUMBER(self):
+
+        pp = self.program_pointer
+        reg_a = self.read_register(pp + 1)
+        value = self.read_register(reg_a)
+
+        print(value)
+
+        return
+
     ############################################################
     #   PROPERTIES
     ############################################################
