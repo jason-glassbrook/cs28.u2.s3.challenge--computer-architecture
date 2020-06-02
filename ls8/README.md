@@ -17,7 +17,7 @@ The CPU could support 256 instructions, as well, but we won't need them.
 For starters, we'll execute code that stores the value 8 in a register,
 then prints it out:
 
-```
+```ls8
 # print8.ls8: Print the number 8 on the screen
 
 10000010 # LDI R0,8
@@ -30,28 +30,28 @@ then prints it out:
 
 The binary numeric value on the left in the `print8.ls8` code above is either:
 
-* the machine code value of the instruction (e.g. `10000010` for `LDI`), also
+-   the machine code value of the instruction (e.g. `10000010` for `LDI`), also
   known as the _opcode_
 
 or
 
-* one of the opcode's arguments (e.g. `00000000` for `R0` or `00001000` for the
+-   one of the opcode's arguments (e.g. `00000000` for `R0` or `00001000` for the
   value `8`), also known as the _operands_.
 
 This code above requires the implementation of three instructions:
 
-* `LDI`: load "immediate", store a value in a register, or "set this register to
+-   `LDI`: load "immediate", store a value in a register, or "set this register to
   this value".
-* `PRN`: a pseudo-instruction that prints the numeric value stored in a
+-   `PRN`: a pseudo-instruction that prints the numeric value stored in a
   register.
-* `HLT`: halt the CPU and exit the emulator.
+-   `HLT`: halt the CPU and exit the emulator.
 
 See [the LS-8 spec](../LS8-spec.md) for more details.
 
 The above program is already hardcoded into the source file `cpu.py`. To run it,
 you will eventually:
 
-```
+```shell
 python3 ls8.py
 ```
 
@@ -59,11 +59,11 @@ but you'll have to implement those three above instructions first!
 
 ## Step 0: IMPORTANT: inventory what is here!
 
-* Make a list of files here.
-* Write a short 3-10-word description of what each file does.
-* Note what has been implemented, and what hasn't.
-* Read this whole file.
-* Skim the spec.
+-   Make a list of files here.
+-   Write a short 3-10-word description of what each file does.
+-   Note what has been implemented, and what hasn't.
+-   Read this whole file.
+-   Skim the spec.
 
 ## Step 1: Add the constructor to `cpu.py`
 
@@ -83,20 +83,20 @@ value of the stack pointer.
 
 ## Step 2: Add RAM functions
 
-In `CPU`, add method `ram_read()` and `ram_write()` that access the RAM inside
+In `CPU`, add method `read_memory()` and `write_memory()` that access the RAM inside
 the `CPU` object.
 
-`ram_read()` should accept the address to read and return the value stored
+`read_memory()` should accept the address to read and return the value stored
 there.
 
-`ram_write()` should accept a value to write, and the address to write it to.
+`write_memory()` should accept a value to write, and the address to write it to.
 
 > Inside the CPU, there are two internal registers used for memory operations:
 > the _Memory Address Register_ (MAR) and the _Memory Data Register_ (MDR). The
 > MAR contains the address that is being read or written to. The MDR contains
 > the data that was read or the data to write. You don't need to add the MAR or
 > MDR to your `CPU` class, but they would make handy parameter names for
-> `ram_read()` and `ram_write()`, if you wanted.
+> `read_memory()` and `write_memory()`, if you wanted.
 
 We'll make use of these helper function later.
 
@@ -114,7 +114,7 @@ variable in `run()`.
 
 Some instructions requires up to the next two bytes of data _after_ the `PC` in
 memory to perform operations on. Sometimes the byte value is a register number,
-other times it's a constant value (in the case of `LDI`). Using `ram_read()`,
+other times it's a constant value (in the case of `LDI`). Using `read_memory()`,
 read the bytes at `PC+1` and `PC+2` from RAM into variables `operand_a` and
 `operand_b` in case the instruction needs them.
 
@@ -134,7 +134,7 @@ name instead of by numeric value.
 
 In `run()` in your if-else block, exit the loop if a `HLT` instruction is
 encountered, regardless of whether or not there are more lines of code in the
-LS-8 program you loaded. 
+LS-8 program you loaded.
 
 We can consider `HLT` to be similar to Python's `exit()` in that we stop
 whatever we are doing, wherever we are.
@@ -162,7 +162,7 @@ into the source. This isn't particularly user-friendly.
 Make changes to `cpu.py` and `ls8.py` so that the program can be specified on
 the command line like so:
 
-```
+```shell
 python3 ls8.py examples/mult.ls8
 ```
 
@@ -194,7 +194,7 @@ so you can look in `sys.argv[1]` for the name of the file to load.
 > expect, and print an error and exit if they didn't.
 
 In `load()`, you will now want to use those command line arguments to open a
-file, read in its contents line by line, and save appropriate data into RAM. 
+file, read in its contents line by line, and save appropriate data into RAM.
 
 As you process lines from the file, you should be on the lookout for blank lines
 (ignore them), and you should ignore everything after a `#`, since that's a
@@ -212,7 +212,7 @@ x = int("1010101", 2)  # Convert binary string to integer
 
 Extend your LS8 emulator to support the following program:
 
-```
+```ls8
 # mult.ls8: Multiply 8x9 and print 72
 
 10000010 # LDI R0,8
@@ -231,13 +231,13 @@ Extend your LS8 emulator to support the following program:
 
 One you run it with `python3 ls8.py examples/mult.ls8`, you should see:
 
-```
+```diagram
 72
 ```
 
 Check the LS-8 spec for what the `MUL` instruction does.
 
-> Note: `MUL` is the responsiblity of the ALU, so it would be nice if your code
+> Note: `MUL` is the responsibility of the ALU, so it would be nice if your code
 > eventually called the `alu()` function with appropriate arguments to get the
 > work done.
 
@@ -295,16 +295,15 @@ This stack resides in main memory and typically starts at the top of memory (at
 a high address) and grows _downward_ as things are pushed on. The LS-8 is no
 exception to this.
 
-Implement a system stack per the spec. Add `PUSH` and `POP` instructions. Read
-  the beginning of the spec to see which register is the stack pointer. 
-  
-* Values themselves should be saved in the ***portion of RAM*** _that is allocated for the stack_. 
-  -  Use the stack pointer to modify the correct block of memory. 
-  - Make sure you update the stack pointer appropriately as you `PUSH` and `POP` items to and from the stack.
+Implement a system stack per the spec. Add `PUSH` and `POP` instructions. Read the beginning of the spec to see which register is the stack pointer.
+
+-   Values themselves should be saved in the ***portion of RAM*** _that is allocated for the stack_.
+    -   Use the stack pointer to modify the correct block of memory.
+    -   Make sure you update the stack pointer appropriately as you `PUSH` and `POP` items to and from the stack.
 
 If you run `python3 ls8.py examples/stack.ls8` you should see the output:
 
-```
+```diagram
 2
 4
 1
@@ -320,21 +319,21 @@ enables you to create reusable functions.
 Subroutines have many similarities to functions in higher-level languages. Just
 as a function in C, JavaScript or Python will jump from the function call, to
 its definition, and then return back to the line of code following the call,
-subroutines will also allow us to execute instructions non-sequentially. 
+subroutines will also allow us to execute instructions non-sequentially.
 
 The stack is used to hold the return address used by `RET`, so you **must**
 implement the stack in step 10, first. Then, add subroutine instructions `CALL`
 and `RET`.
 
-* For `CALL`, you will likely have to modify your handler call in `cpu_run()`.
-  The problem is that some instructions want to execute and move to the next
-  instruction like normal, but others, like `CALL` and `JMP` want to go to a
-  specific address.
+-   For `CALL`, you will likely have to modify your handler call in `cpu_run()`.
+    The problem is that some instructions want to execute and move to the next
+    instruction like normal, but others, like `CALL` and `JMP` want to go to a
+    specific address.
 
-  > Note: `CALL` is very similar to the `JMP` instruction. However, there is one
-  > key difference between them. Can you find it in the specs? 
+    > Note: `CALL` is very similar to the `JMP` instruction. However, there is one
+    > key difference between them. Can you find it in the specs?
 
-  * In **any** case where the instruction handler sets the `PC` directly, you
+-   In **any** case where the instruction handler sets the `PC` directly, you
     _don't_ want to advance the PC to the next instruction. So you'll have to
     set up a special case for those types of instructions. This can be a flag
     you explicitly set per-instruction... but can also be computed from the
@@ -342,7 +341,7 @@ and `RET`.
 
 If you run `python3 ls8.py examples/call.ls8` you should see the output:
 
-```
+```diagram
 20
 30
 36
@@ -355,7 +354,7 @@ Add interrupts to the LS-8 emulator.
 
 **You must have implemented a CPU stack before doing this.**
 
-**You must have implmented the `ST` instruction before doing this.**
+**You must have implemented the `ST` instruction before doing this.**
 
 See the [LS-8
 spec](https://github.com/LambdaSchool/Computer-Architecture-One/blob/master/LS8-SPEC.md)
@@ -381,7 +380,7 @@ popped off the stack and execution continues normally.
 This code prints out the letter `A` from the timer interrupt handler
 that fires once per second.
 
-```
+```ls8
 # interrupts.ls8
 
 10000010 # LDI R0,0XF8
@@ -458,7 +457,7 @@ does it differently than Unix/Mac.
 
 Write an LS-8 assembly program that prints this curve on the screen:
 
-```
+```diagram
 *
 **
 ****

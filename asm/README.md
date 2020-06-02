@@ -5,19 +5,19 @@ files.
 
 ## Prerequisites
 
-* NodeJS
+-   NodeJS
 
 ## Usage
 
 This will produce a `.ls8` file for a given source.
 
-```
+```shell
 python asm.py source.asm
 ```
 
 ## Features
 
-* Labels
-* String constants
-* Numeric constants
-* Comments
+-   Labels
+-   String constants
+-   Numeric constants
+-   Comments
